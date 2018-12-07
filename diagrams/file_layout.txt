@@ -12,6 +12,7 @@
 │       ├── helpers
 │       │   ├── pub_sub.js
 │       │   └── request_helper.js
+│       │   └── utilities.js
 │       ├── models
 │       │   └── cards.js --grab the data, format it, send to game.js and cards_grid_view--
 │       │   └── game.js --use the data grabbed and apply game logic--
