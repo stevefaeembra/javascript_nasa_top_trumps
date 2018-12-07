@@ -1,0 +1,30 @@
+├── README.md
+├── client
+│   ├── public
+│   │   ├── css
+│   │   │   └── main.css
+│   │   ├── images
+│   │   │   ├── background.jpg
+│   │   │   └── card_background.png
+│   │   └── index.html
+│   └── src
+│       ├── app.js
+│       ├── helpers
+│       │   ├── pub_sub.js
+│       │   └── request_helper.js
+│       ├── models
+│       │   └── cards.js --grab the data, format it, send to game.js and cards_grid_view--
+│       │   └── game.js --use the data grabbed and apply game logic--
+│       └── views
+│           ├── card_view.js
+│           └── cards_grid_view.js
+│           └── winner_view.js
+├── package-lock.json
+├── package.json
+├── server
+│   ├── db
+│   │   └── planets.js.  --Array of planet objects--
+│   ├── helpers
+│   │   └── create_router.js
+│   └── server.js --send a number of planets specified--
+└── webpack.config.js
