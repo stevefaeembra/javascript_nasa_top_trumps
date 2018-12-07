@@ -10,7 +10,7 @@ app.use(express.static(publicPath));
 app.use(bodyParser.json());
 
 const planetRouter = new PlanetRouter(data);
-app.use('/api/bucket', planetRouter);
+app.use('/exoplanets', planetRouter);
 
 app.listen(3000, function () {
   console.log('Started server');
