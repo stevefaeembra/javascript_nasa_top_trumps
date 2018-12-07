@@ -4,8 +4,6 @@
 │   │   ├── css
 │   │   │   └── main.css
 │   │   ├── images
-│   │   │   ├── background.jpg
-│   │   │   └── card_background.png
 │   │   └── index.html
 │   └── src
 │       ├── app.js
@@ -14,7 +12,7 @@
 │       │   └── request_helper.js
 │       │   └── utilities.js
 │       ├── models
-│       │   └── cards.js --grab the data, format it, send to game.js and cards_grid_view--
+│       │   └── deck.js --grab the data, format it, send to game.js and cards_grid_view--
 │       │   └── game.js --use the data grabbed and apply game logic--
 │       └── views
 │           ├── card_view.js
@@ -27,6 +25,5 @@
 │   │   └── planets.js.  --Array of planet objects--
 │   ├── helpers
 │   │   └── create_router.js
-│   │   └── deck.js
 │   └── server.js --send a number of planets specified--
 └── webpack.config.js
