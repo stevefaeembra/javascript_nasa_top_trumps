@@ -24,8 +24,8 @@ Deck.prototype.splitDeck = function (deck) {
 };
 
 Deck.prototype.popCardsForPlayers = function (hands) {
-  playerCard = hands[0].pop();
-  computerCard = hands[1].pop();
+  const playerCard = hands[0].pop();
+  const computerCard = hands[1].pop();
   return [playerCard, computerCard]
 };
 
