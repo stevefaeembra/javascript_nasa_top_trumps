@@ -20,4 +20,17 @@ describe('Croupier', function () {
     assert.strictEqual(result.length, 28);
   });
 
+  it('should discard poor cards where data is missing', function () {
+    let result = croupier.deal(14);
+    let allGood = result.every((planet) => {
+      return planet.pl_radj !== null &&
+      planet.pl_bmassj !== null &&
+      planet.pl_orbsmax !== null &&
+      planet.pl_orbper !== null;
+    });
+    assert.strictEqual(allGood,true);
+    assert.strictEqual(croupier.deck.length,444)
+  });
+
+
 });
