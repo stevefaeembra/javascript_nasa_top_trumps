@@ -5,7 +5,6 @@ const PlanetRouter = function (collection) {
   console.log("Making router");
 
   router.get('/', (req, res) => {
-    console.log("Inside router yipee");
     res.json({'hand': this.deal(collection, 1)});
   });
 
