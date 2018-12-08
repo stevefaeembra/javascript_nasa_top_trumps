@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node server/server.js",
-    "test": "mocha client/src/models/specs",
-    "server:dev": "nodemon server/server.js",
+    "test": "mocha client/src/models/specs server/src/helpers/spec",
+    "server:dev": "nodemon server/src/server.js",
     "build": "webpack -w"
   },
   "author": "",
