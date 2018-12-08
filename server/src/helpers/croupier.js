@@ -8,7 +8,9 @@ Croupier.prototype.cardIsGood = function (planet) {
   return planet.pl_radj !== null &&  // radius as multiple of Jupiter
   planet.pl_bmassj !== null &&       // best-guess mass relative to jupiter
   planet.pl_orbsmax !== null &&      // max distance from star in AU
-  planet.pl_orbper !== null;         // orbital period, days
+  planet.pl_orbper !== null &&        // orbital period, days
+  planet.st_teff != null &&          // blackbody color temperature (gives a hint as to colour)
+  planet.pl_pnum != null;            // number of planets
 };
 
 Croupier.prototype.discardRubbishCards = function (cards) {

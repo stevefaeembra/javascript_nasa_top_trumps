@@ -26,10 +26,12 @@ describe('Croupier', function () {
       return planet.pl_radj !== null &&
       planet.pl_bmassj !== null &&
       planet.pl_orbsmax !== null &&
-      planet.pl_orbper !== null;
+      planet.pl_orbper !== null &&
+      planet.st_teff != null &&
+      planet.pl_pnum != null;
     });
     assert.strictEqual(allGood,true);
-    assert.strictEqual(croupier.deck.length,444)
+    assert.strictEqual(croupier.deck.length,437);
   });
 
   it('should never send back duplicates', function () {
