@@ -32,5 +32,16 @@ describe('Croupier', function () {
     assert.strictEqual(croupier.deck.length,444)
   });
 
+  it('should never send back duplicates', function () {
+    for(var i=0;i<1000;i++) {
+      // deal two cards, ensure no dupes
+      var mvp_hand = croupier.deal(22);
+      var allUnique = mvp_hand.every((card, index, array) => {
+        // this should fail if a card appears twice...
+        return mvp_hand.indexOf(card) === array.indexOf(card);
+      })
+      assert.strictEqual(allUnique, true);
+    }
+  });
 
 });

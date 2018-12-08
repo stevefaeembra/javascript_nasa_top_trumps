@@ -51,4 +51,13 @@ Croupier.prototype.shuffle = function (myArray) {
 
 };
 
+// quick (unexported) check to see that the shuffling works
+// it's not possible to test this with a unit test as the
+// results are random. run this module in node to check this.
+
+let croupier = new Croupier(data);
+croupier.deal().forEach( (planet) => {
+  console.log(`"${planet.pl_name}" Dist:${planet.pl_orbsmax} OrbDays:${planet.pl_orbper} Rad:${planet.pl_radj}, Mass:${planet.pl_bmassj}`);
+});
+
 module.exports = Croupier;
