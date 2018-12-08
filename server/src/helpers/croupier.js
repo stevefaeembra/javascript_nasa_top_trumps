@@ -5,7 +5,7 @@ const Croupier = function (cards) {
 }
 
 
-Croupier.prototype.deal = function (number_per_player=1) {
+Croupier.prototype.deal = function(number_per_player=1) {
   // given deck and number of cards per player,
   // return flat array of 2*number_per_player cards
 
