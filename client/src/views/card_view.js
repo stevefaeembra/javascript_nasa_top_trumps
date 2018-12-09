@@ -8,3 +8,5 @@ CardView.prototype.createCustomElement = function (elementType, label, textConte
 
   return customElement;
 };
+
+module.exports = CardView;
