@@ -24,9 +24,15 @@ Deck.prototype.splitDeck = function (deck) {
 };
 
 Deck.prototype.popCardsForPlayers = function (hands) {
-  const playerCard = hands[0].pop();
-  const computerCard = hands[1].pop();
-  return [playerCard, computerCard]
+  const poppedCards = [];
+  hands.forEach(hand => poppedCards.push(hand.pop()));
+  if (typeof CustomEvent === 'undefined') {
+    return poppedCards;
+  }
+  else {
+    PubSub.publish('Deck:drawn-cards', poppedCards);
+    return poppedCards;
+  }
 };
 
 module.exports = Deck;
