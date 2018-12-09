@@ -7,8 +7,13 @@ const CardGridView = function (container){
 
 CardGridView.prototype.bindEvents = function () {
   PubSub.subcribe('Deck:drawn-cards', (event) => {
+    this.clearGrid();
+    this.renderCardDetails(event.detail)
+  });
+};
 
-  })
+CardGridView.prototype.clearGrid = function () {
+  this.container.innerHTML = '';
 };
 
 module.exports = CardGridView;
