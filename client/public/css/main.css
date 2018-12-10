@@ -48,7 +48,7 @@ h1 {
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  transform: scale(.85);
+  transform: scale(.7);
   transform-origin: top;
 }
 
@@ -56,7 +56,7 @@ h1 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(0deg, black 0%, grey 100%);
+  background-image: linear-gradient(0deg, gold 0%, green 100%);
   margin: 0 2rem;
   padding: 1rem;
   border: 1px solid black;
@@ -69,7 +69,7 @@ h1 {
 }
 
 .stats {
-  flex: 2;
+  flex: 3;
 }
 
 img {
