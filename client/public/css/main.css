@@ -51,7 +51,7 @@ h1 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: grey;
   margin: 0 2rem;
   padding: 1rem;
   border: 2px solid black;
@@ -74,9 +74,7 @@ img {
 .stats-row {
   display: flex;
   flex-grow: row;
-
   padding: 0.5rem 0 ;
-  background-color: white;
 }
 
 .stats-row-label {
