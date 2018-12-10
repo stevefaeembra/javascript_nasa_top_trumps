@@ -18,14 +18,6 @@ Deck.prototype.getDeal = function () {
   })
 };
 
-Deck.prototype.bindEvents = function () {
-  PubSub.subscribe('Game:winner-determined', (event) => {
-    const winner = event.detail;
-    this.putCardsAtBackOfHands(winner);
-  });
-
-};
-
 Deck.prototype.splitDeck = function (deck) {
   const handSize = deck.length/2;
   const playerHand = deck.slice(0, handSize);
@@ -60,13 +52,15 @@ Deck.prototype.getHandSizes = function (hands) {
 
 Deck.prototype.putCardsAtBackOfHands = function (winner) {
   if (winner === 1) {
-    console.log(this.hands);
-
-    this.hands[0].push(this.cardsSentToGame);
+    console.log('AHHHHHH', this.cardsSentToGame);
+    this.hands[0].push(this.cardsSentToGame[0]);
+    this.hands[0].push(this.cardsSentToGame[1]);
   }
   else if (winner === 2) {
-    this.hands[1].push(this.cardsSentToGame);
+    this.hands[1].push(this.cardsSentToGame[0]);
+    this.hands[1].push(this.cardsSentToGame[1]);
   }
+  console.log('hand is one array', this.hands);
 };
 
 module.exports = Deck;

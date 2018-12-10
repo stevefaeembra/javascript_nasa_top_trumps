@@ -15,6 +15,7 @@ Game.prototype.bindEvents = function () {
     const categories = this.getCategories(cardsInPlay[0]);
     const randomCategory = this.randomCategory(categories);
     const winner = this.compareCards(cardsInPlay, randomCategory);
+    this.deck.putCardsAtBackOfHands(winner);
     PubSub.publish('Game:winner-determined', winner);
   });
 };
