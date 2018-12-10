@@ -4,6 +4,18 @@ const Croupier = function (cards) {
   this.deck = this.discardRubbishCards(cards);
 }
 
+Croupier.prototype.playCard = function (planet) {
+  // returns a subset of the fields needed for playing
+  return {
+    pl_name : planet.pl_name,
+    pl_radj : planet.pl_radj,
+    pl_orbsmax : planet.pl_orbsmax,
+    pl_orbper : planet.pl_orbper,
+    st_teff : planet.st_teff,
+    pl_pnum : planet.pl_pnum
+  };
+};
+
 Croupier.prototype.cardIsGood = function (planet) {
   return planet.pl_radj !== null &&  // radius as multiple of Jupiter
   planet.pl_bmassj !== null &&       // best-guess mass relative to jupiter
@@ -18,6 +30,9 @@ Croupier.prototype.discardRubbishCards = function (cards) {
   // about 10% of cards are suitable
   return cards.filter( (card) => {
     return this.cardIsGood(card);
+  }).map((planet) => {
+    // return JUST the playing fields
+    return this.playCard(planet);
   });
 };
 
