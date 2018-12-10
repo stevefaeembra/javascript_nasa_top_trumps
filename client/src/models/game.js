@@ -37,7 +37,10 @@ Game.prototype.compareCards = function (cards, category) {
     else if (card[category] > winnerCard[0][category]) {
       winnerCard.pop();
       winnerCard.push(card);
-    };
+    }
+    else if (card[category] === winnerCard[0][category]) {
+      return 0;
+    }
   };
   return cards.indexOf(winnerCard[0])+1;
 };
