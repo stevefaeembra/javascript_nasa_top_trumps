@@ -38,9 +38,8 @@ Deck.prototype.popCardsForPlayers = function (hands) {
 Deck.prototype.getHandSizes = function (hands) {
   const countedHands = [];
   hands.forEach((hand) => {
-    countedHands.push(hand.length())
+    countedHands.push(hand.length)
   });
-  // return countedHands;
   PubSub.publish('Deck:hand-sizes', countedHands);
   return countedHands;
 };
