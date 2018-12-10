@@ -20,4 +20,10 @@ describe('Deck', function () {
     assert.deepStrictEqual(deck.popCardsForPlayers(deck.splitDeck(cardDeck)), expected);
   });
 
+  it('should get an array of hand sizes', function (){
+    const expected = [5, 5];
+    const splitDeck = deck.splitDeck(cardDeck);
+    assert.deepStrictEqual(getHandSize(splitDeck), expected);
+  });
+
 });
