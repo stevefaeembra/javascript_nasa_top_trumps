@@ -10,13 +10,13 @@ WinnerView.prototype.render = function (winner) {
   messageDiv.className = 'message';
   switch (winner) {
     case 0:
-      messageDiv.textContent("Draw!");
+      messageDiv.textContent = "Draw!";
       break;
     case 1:
-      messageDiv.textContent("Player 1 Wins!");
+      messageDiv.textContent = "Player 1 Wins!";
       break;
     case 2:
-      messageDiv.textContent("Player 2 wins!");
+      messageDiv.textContent = "Player 2 wins!";
       break;
   }
   this.container.appendChild(messageDiv);
