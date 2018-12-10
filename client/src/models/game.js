@@ -38,6 +38,7 @@ Game.prototype.getRandomNumber = function (maximum) {
 };
 
 Game.prototype.compareCards = function (cards, category) {
+  console.log(category);
   const winnerCard = []
   for (card of cards) {
     if (winnerCard.length === 0) {
