@@ -40,6 +40,8 @@ Deck.prototype.getHandSizes = function (hands) {
   hands.forEach((hand) => {
     countedHands.push(hand.length())
   });
+  // return countedHands;
+  PubSub.publish('Deck:hand-sizes', countedHands);
   return countedHands;
 };
 
