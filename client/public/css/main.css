@@ -6,10 +6,6 @@
 
 html {
   font-size: 16px;
-  background-color: wheat;
-}
-
-html {
   background-image: url('../images/galaxy.jpg');
   background-size: cover;
 }
@@ -19,6 +15,30 @@ body {
   width:90%;
   margin: 0 auto;
   font-family: 'Orbitron', sans-serif;
+}
+
+#content {
+  text-align: center;
+}
+
+.message {
+  padding-bottom: 2rem;
+}
+
+#winner-container,
+.rules,
+h1
+{
+  color: white;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+#winner-container {
+  font-size: 2rem;
+  color: yellow;
 }
 
 #card-grid-container {
