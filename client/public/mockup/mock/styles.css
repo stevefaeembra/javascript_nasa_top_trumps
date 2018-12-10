@@ -1,0 +1,82 @@
+body {
+  font-family: 'Orbitron', sans-serif;
+  background-image: url('./images/galaxy.jpg');
+  background-size: cover;
+}
+
+.header {
+  color: white;
+  text-align: center;
+  align-items: center;
+  font-size: 2em;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: silver;
+  padding: 10px;
+  margin; 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.stats-row {
+  display: flex;
+  flex-direction: row;
+  padding: 2px;
+  margin: 6px;
+  font-size: 1.2em;
+}
+
+.stats-row-label {
+  background-color: silver;
+  width: 200px;
+  height: 30px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border-radius: 5px;
+
+}
+
+.stats-row-value {
+  background-color: green;
+  width: 120px;
+  height: 30px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border-radius: 5px;
+
+}
+
+
+
+.player-card {
+  font-size: 1.2em;
+  color: white;
+  background-color: black;
+  border-style: solid;
+  border-color: silver;
+  border-width: 2px;
+  width: 340px;
+  padding: 5px;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  border-radius: 20px;
+  /* font-family: 'Space Mono', monospace; */
+  margin: 10px
+}
+
+#card-list li {
+  list-style-type: none;
+}
+
+.planet-image {
+  align-items: center;
+  align-content: center;
+}
