@@ -31,4 +31,4 @@ CardView.prototype.createCustomElement = function (type, attr, value) {
  return element;
 };
 
-module.exports = CardView;
+module.exports = CardView; 
