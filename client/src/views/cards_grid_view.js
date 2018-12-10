@@ -29,4 +29,5 @@ CardGridView.prototype.createCardItem = function (card) {
   return cardItem;
 };
 
+
 module.exports = CardGridView;
