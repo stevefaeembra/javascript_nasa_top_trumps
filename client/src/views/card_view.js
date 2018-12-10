@@ -29,7 +29,7 @@ CardView.prototype.renderCardDetails = function (card) {
     const labelDiv = this.createCustomElement('div','className','stats-row-label');
     labelDiv.textContent = key;
     const valueDiv = this.createCustomElement('div','className','stats-row-value');
-    valueDiv.textContent playing_fields[key];
+    valueDiv.textContent = playing_fields[key];
     statDiv.appendChild(labelDiv);
     statDiv.appendChild(valueDiv);
     stats.appendChild(statDiv);
@@ -40,3 +40,5 @@ CardView.prototype.renderCardDetails = function (card) {
 
   return playerCard;
 };
+
+module.exports = CardView;
