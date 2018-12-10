@@ -14,6 +14,7 @@ body {
   width:90%;
   border:1px solid black;
   margin: 0 auto;
+  font-family: 'Orbitron', sans-serif;
 }
 
 #card-grid-container {
@@ -26,6 +27,7 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  margin: 0 2rem;
 }
 
 .planet-image {
@@ -39,4 +41,19 @@ body {
 img {
   width: 100%;
   height: 100%;
+}
+
+.stats-row {
+  display: flex;
+  flex-grow: row;
+}
+
+.stats-row-label {
+  flex: 3;
+  text-align: left;
+}
+
+.stats-row-value {
+  flex: 2;
+  text-align: center;
 }
