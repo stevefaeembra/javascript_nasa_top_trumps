@@ -10,6 +10,7 @@ const Game = function (players) {
 
 Game.prototype.startGame = function () {
   this.deck.getDeal();
+  console.log(this.deck);
   const cardsInPlay = this.deck.popCardsForPlayers(this.deck.hands);
   //pass cardsInPlay into compareCards
 };

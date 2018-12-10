@@ -11,7 +11,8 @@ Deck.prototype.getDeal = function () {
   request.get()
   .then((nPlanetData) =>{
     this.deck = nPlanetData;
-    this.hands = splitDeck(this.deck);
+    this.hands = this.splitDeck(this.deck);
+    console.log(this.hands);
     PubSub.publish('Deck:deck-changed', this.hands);
   })
 };
