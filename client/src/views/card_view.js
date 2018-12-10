@@ -13,6 +13,8 @@ CardView.prototype.renderCardDetails = function (card) {
 
   image.appendChild(imageDiv);
 
+  console.log(card.st_teff);
+
   const playing_fields = {
     "Name": card.pl_name,
     "Distance to Sun (AU)": card.pl_orbsmax,
@@ -20,7 +22,7 @@ CardView.prototype.renderCardDetails = function (card) {
     "Radius (x Jupiter)": card.pl_radj,
     "Mass (x Jupiter)": card.pl_bmassj,
     "Number in System": card.pl_pnum,
-    "Temperature (K)": card.pl_teff
+    "Temperature (K)": card.st_teff
   };
 
 

@@ -12,6 +12,10 @@ Game.prototype.bindEvents = function () {
   PubSub.subscribe('Deck:deck-changed', (event) => {
     const myhands = event.detail;
     const cardsInPlay = this.deck.popCardsForPlayers(myhands);
+    const categories = this.getCategories(cardsInPlay[0]);
+    const randomCategory = this.randomCategory(categories);
+    const winner = this.compareCards(cardsInPlay, randomCategory);
+    PubSub.publish('Game:winner-determined', winner);
   });
 };
 
@@ -34,6 +38,7 @@ Game.prototype.getRandomNumber = function (maximum) {
 };
 
 Game.prototype.compareCards = function (cards, category) {
+  console.log(category);
   const winnerCard = []
   for (card of cards) {
     if (winnerCard.length === 0) {
