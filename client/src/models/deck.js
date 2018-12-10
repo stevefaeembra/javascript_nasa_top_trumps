@@ -9,7 +9,7 @@ const Deck = function () {
 Deck.prototype.getDeal = function () {
   const request = new RequestHelper('http://localhost:3000/api/exoplanets');
   request.get()
-    then((nPlanetData) =>{
+    .then((nPlanetData) =>{
       this.deck = nPlanetData;
       this.hands = splitDeck(this.deck);
       PubSub.publish('Deck:deck-changed', this.hands);
