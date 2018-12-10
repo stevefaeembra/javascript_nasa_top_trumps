@@ -5,9 +5,9 @@ const bodyParser = require('body-parser');
 const PlanetRouter = require('./helpers/create_router.js');
 const data = require('../db/planets.js');
 
-const publicPath = path.join(__dirname, './client/public');
+const publicPath = path.join(__dirname, '../../client/public');
 
-app.use(express.static(publicPath));
+app.use('/', express.static(publicPath));
 app.use(bodyParser.json());
 
 const planetRouter = new PlanetRouter(data);
