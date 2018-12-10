@@ -55,4 +55,5 @@ Game.prototype.compareCards = function (cards, category) {
   return cards.indexOf(winnerCard[0])+1;
 };
 
+
 module.exports = Game;

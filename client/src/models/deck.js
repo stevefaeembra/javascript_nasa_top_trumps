@@ -4,6 +4,7 @@ const RequestHelper = require('../helpers/request_helper.js');
 const Deck = function () {
   this.deck = null;
   this.hands = null;
+  this.cardsSentToGame = null;
 }
 
 Deck.prototype.getDeal = function () {
@@ -15,6 +16,14 @@ Deck.prototype.getDeal = function () {
     console.log(this.hands);
     PubSub.publish('Deck:deck-changed', this.hands);
   })
+};
+
+Deck.prototype.bindEvents = function () {
+  PubSub.subscribe('Game:winner-determined', (event) => {
+    const winner = event.detail;
+    this.putCardsAtBackOfHands(winner);
+  });
+
 };
 
 Deck.prototype.splitDeck = function (deck) {
@@ -33,7 +42,10 @@ Deck.prototype.popCardsForPlayers = function (hands) {
   }
   else {
     PubSub.publish('Deck:drawn-cards', poppedCards);
+    this.hands = hands;
+    this.cardsSentToGame = poppedCards;
     return poppedCards;
+
   }
 };
 
@@ -44,6 +56,17 @@ Deck.prototype.getHandSizes = function (hands) {
   });
   PubSub.publish('Deck:hand-sizes', countedHands);
   return countedHands;
+};
+
+Deck.prototype.putCardsAtBackOfHands = function (winner) {
+  if (winner === 1) {
+    console.log(this.hands);
+
+    this.hands[0].push(this.cardsSentToGame);
+  }
+  else if (winner === 2) {
+    this.hands[1].push(this.cardsSentToGame);
+  }
 };
 
 module.exports = Deck;
