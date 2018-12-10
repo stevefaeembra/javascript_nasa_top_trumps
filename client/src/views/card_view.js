@@ -13,22 +13,30 @@ CardView.prototype.renderCardDetails = function (card) {
 
   image.appendChild(imageDiv);
 
-  const statsDiv = this.createCustomElement('div', 'className', 'stats-row');
-  //<img src="./images/earth.jpg" alt="earth" height='300px' width='300px'>
+  const playing_fields = {
+    "Name": card.pl_name,
+    "Distance to Sun (AU)": card.pl_orbsmax,
+    "Orbital Period (Days)": card.pl_orbper,
+    "Radius (x Jupiter)": card.pl_radj,
+    "Mass (x Jupiter)": card.pl_bmassj,
+    "Number in System": card.pl_pnum,
+    "Temperature (K)": card.pl_teff
+  };
+
+
+  Object.keys(playing_fields).forEach((key) => {
+    const statDiv = this.createCustomElement('div','className','stats-row');
+    const labelDiv = this.createCustomElement('div','className','stats-row-label');
+    labelDiv.textContent = key;
+    const valueDiv = this.createCustomElement('div','className','stats-row-value');
+    valueDiv.textContent playing_fields[key];
+    statDiv.appendChild(labelDiv);
+    statDiv.appendChild(valueDiv);
+    stats.appendChild(statDiv);
+  })
 
   playerCard.appendChild(image);
   playerCard.appendChild(stats);
 
-
-
   return playerCard;
 };
-
-
-CardView.prototype.createCustomElement = function (type, attr, value) {
- const element = document.createElement(type);
- element[attr] = value;
- return element;
-};
-
-module.exports = CardView; 
