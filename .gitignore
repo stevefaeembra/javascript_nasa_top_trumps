@@ -2,9 +2,3 @@
 /node_modules
 bundle.js
 /scratch
-
-.then((nPlanetData) =>{
-  this.deck = nPlanetData;
-  this.hands = splitDeck(this.deck);
-  PubSub.publish('Deck:deck-changed', this.hands);
-});
