@@ -16,4 +16,11 @@ CardGridView.prototype.clearGrid = function () {
   this.container.innerHTML = '';
 };
 
+CardGridView.prototype.renderCardDetails = function (cards) {
+  cards.forEach((card) => {
+    const cardItem = this.createCardItem(card);
+    this.container.appendChild(cardItem);
+  });
+};
+
 module.exports = CardGridView;
