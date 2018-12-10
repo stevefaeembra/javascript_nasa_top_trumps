@@ -6,7 +6,7 @@ const CardGridView = function (container){
 };
 
 CardGridView.prototype.bindEvents = function () {
-  PubSub.subcribe('Deck:drawn-cards', (event) => {
+  PubSub.subscribe('Deck:drawn-cards', (event) => {
     this.clearGrid();
     this.renderCards(event.detail)
   });
@@ -25,7 +25,7 @@ CardGridView.prototype.renderCards = function (cards) {
 
 CardGridView.prototype.createCardItem = function (card) {
   const cardView = new CardView();
-  const cardItem = CardView.renderCardDetails(card);
+  const cardItem = cardView.renderCardDetails(card);
   return cardItem;
 };
 

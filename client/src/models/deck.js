@@ -26,6 +26,7 @@ Deck.prototype.splitDeck = function (deck) {
 
 Deck.prototype.popCardsForPlayers = function (hands) {
   const poppedCards = [];
+  console.log(hands);
   hands.forEach(hand => poppedCards.push(hand.pop()));
   if (typeof CustomEvent === 'undefined') {
     return poppedCards;

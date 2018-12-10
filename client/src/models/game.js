@@ -8,11 +8,16 @@ const Game = function (players) {
   this.deck = new Deck();
 };
 
+Game.prototype.bindEvents = function () {
+  PubSub.subscribe('Deck:deck-changed', (event) => {
+    const myhands = event.detail;
+    const cardsInPlay = this.deck.popCardsForPlayers(myhands);
+    PubSub.publish('Game:players-cards', cardsInPlay);
+  })
+}
+
 Game.prototype.startGame = function () {
   this.deck.getDeal();
-  console.log(this.deck);
-  const cardsInPlay = this.deck.popCardsForPlayers(this.deck.hands);
-  //pass cardsInPlay into compareCards
 };
 
 Game.prototype.getCategories = function (object) {

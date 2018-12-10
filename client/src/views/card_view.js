@@ -41,4 +41,10 @@ CardView.prototype.renderCardDetails = function (card) {
   return playerCard;
 };
 
+CardView.prototype.createCustomElement = function (type, attr, value) {
+ const element = document.createElement(type);
+ element[attr] = value;
+ return element;
+};
+
 module.exports = CardView;
