@@ -21,8 +21,7 @@ CardView.prototype.renderCardDetails = function (card) {
     "Orbital Period (Days)": card.pl_orbper,
     "Radius (x Jupiter)": card.pl_radj,
     "Mass (x Jupiter)": card.pl_bmassj,
-    "Number in System": card.pl_pnum,
-    "Temperature (K)": card.st_teff
+    "Number in System": card.pl_pnum
   };
 
 
