@@ -57,10 +57,10 @@ Deck.prototype.putCardsAtBackOfHands = function (winner) {
     this.hands[1].push(this.cardsSentToGame[0]);
     this.hands[1].push(this.cardsSentToGame[1]);
   }
-  // else if (winner === 0) {
-  //   this.discarded.push(this.cardsSentToGame[0]);
-  //   this.discarded.push(this.cardsSentToGame[1]);
-  // }
+  else if (winner === 0) {
+    this.discarded.push(this.cardsSentToGame[0]);
+    this.discarded.push(this.cardsSentToGame[1]);
+  }
   console.log('DISCARDED', this.discarded);
 };
 

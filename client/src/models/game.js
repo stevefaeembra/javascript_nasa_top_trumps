@@ -13,6 +13,11 @@ Game.prototype.bindEvents = function () {
   PubSub.subscribe('Deck:deck-loaded', () => {
     this.playMatch();
   });
+  PubSub.subscribe('CardView:category-clicked', (event) => {
+    if (this.currentPlayer === 1) {
+      this.playerTurn(event.detail)
+    }
+  })
 };
 
 Game.prototype.startGame = function () {
@@ -22,19 +27,14 @@ Game.prototype.startGame = function () {
 Game.prototype.playMatch = function () {
   this.cardsInPlay = this.deck.popCardsForPlayers();
   PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
-  if (this.currentPlayer === 1) {
-    this.playerTurn();
-  }
-  else if (this.currentPlayer === 2) {
+  if (this.currentPlayer === 2) {
     this.computerTurn();
   }
 };
 
-Game.prototype.playerTurn = function () {
-  PubSub.subscribe('CardView:category-clicked', (event) => {
-    const category = this.keyFormatter(event.detail);
+Game.prototype.playerTurn = function (label) {
+    const category = this.keyFormatter(label);
     this.endMatch(category);
-  })
 };
 
 Game.prototype.keyFormatter = function (label) {
@@ -74,6 +74,8 @@ Game.prototype.endMatch = function (category) {
   PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
   PubSub.publish('Game:winner-determined', winner);
   this.checkWinner();
+  this.switchTurns();
+  this.playMatch();
 };
 
 Game.prototype.compareCards = function (category) {
@@ -104,9 +106,6 @@ Game.prototype.checkWinner = function () {
   else if (this.deck.hands[1].length === 0 && this.deck.hands[0].length === 0) {
     PubSub.publish('Game:game-winner-determined', 'Draw! What are the chances?! (astronomical!)');
   }
-  this.switchTurns();
-  console.log('HANDS', this.deck.hands)
-  // this.playMatch();
 };
 
 Game.prototype.switchTurns = function () {

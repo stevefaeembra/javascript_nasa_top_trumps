@@ -44,6 +44,7 @@ CardView.prototype.renderCardDetails = function (card) {
     labelDiv.textContent = key;
     if (labelDiv.textContent !== "Name" && labelDiv.textContent !== "Star Temp") {
     labelDiv.addEventListener('click', (event) => {
+      event.preventDefault();
       PubSub.publish('CardView:category-clicked', event.target.textContent)
     })
   }
