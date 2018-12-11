@@ -65,7 +65,9 @@ Game.prototype.playMatch = function () {
 
 Game.prototype.checkWinner = function () {
   if (this.deck.hands[0].length !== 0 && this.deck.hands[1].length !== 0) {
-    this.playMatch();
+    PubSub.subscribe("NextMatchButton:start-next-match", () => {
+      this.playMatch();
+    });
   }
   else if (this.deck.hands[0].length === 0 && this.deck.hands[1].length !== 0) {
     PubSub.publish('Game:game-winner-determined', 'Computer wins!');
