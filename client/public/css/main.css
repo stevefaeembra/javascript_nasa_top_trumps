@@ -29,7 +29,7 @@ body {
 }
 
 #winner-container,
-.rules,
+#rules-modal,
 h1
 {
   color: white;
@@ -38,6 +38,38 @@ h1
 h1 {
   font-size: 3rem;
 }
+
+/* Modal for game rules */
+
+#rules-modal-container {
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width:512px;
+  height:300px;
+  z-index: 1000;
+  transform: translateX(-50%) translateY(-100%);
+  background-color: wheat;
+  border: 5px solid red;
+}
+
+#rules-modal {
+}
+
+/* Modal Content */
+.rules-content {
+  padding: 1rem;
+
+}
+
+.newLine{
+  font-size: 0.8rem;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+
 
 #winner-container {
   font-size: 2rem;
