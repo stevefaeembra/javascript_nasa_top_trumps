@@ -4,6 +4,7 @@ const RequestHelper = require('../helpers/request_helper.js');
 const Deck = function () {
   this.deck = null;
   this.hands = null;
+  this.discarded = [];
   this.cardsSentToGame = null;
 }
 
@@ -33,6 +34,7 @@ Deck.prototype.popCardsForPlayers = function () {
   else {
     PubSub.publish('Deck:drawn-cards', poppedCards);
     this.cardsSentToGame = poppedCards;
+    console.log('CARS SENT TO GAME', this.cardsSentToGame);
     return poppedCards;
   }
 };
@@ -55,7 +57,11 @@ Deck.prototype.putCardsAtBackOfHands = function (winner) {
     this.hands[1].push(this.cardsSentToGame[0]);
     this.hands[1].push(this.cardsSentToGame[1]);
   }
-  console.log(this.hands);
+  // else if (winner === 0) {
+  //   this.discarded.push(this.cardsSentToGame[0]);
+  //   this.discarded.push(this.cardsSentToGame[1]);
+  // }
+  console.log('DISCARDED', this.discarded);
 };
 
 module.exports = Deck;

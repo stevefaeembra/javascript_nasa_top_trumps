@@ -6,6 +6,7 @@ const Deck = require('./deck.js');
 const Game = function () {
   this.currentPlayer = 1;
   this.deck = new Deck();
+  this.cardsInPlay = null;
 };
 
 Game.prototype.bindEvents = function () {
@@ -16,7 +17,41 @@ Game.prototype.bindEvents = function () {
 
 Game.prototype.startGame = function () {
   this.deck.getDeal();
-  this.startMatch();
+};
+
+Game.prototype.playMatch = function () {
+  this.cardsInPlay = this.deck.popCardsForPlayers();
+  PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
+  if (this.currentPlayer === 1) {
+    this.playerTurn();
+  }
+  else if (this.currentPlayer === 2) {
+    this.computerTurn();
+  }
+};
+
+Game.prototype.playerTurn = function () {
+  PubSub.subscribe('CardView:category-clicked', (event) => {
+    const category = this.keyFormatter(event.detail);
+    this.endMatch(category);
+  })
+};
+
+Game.prototype.keyFormatter = function (label) {
+  const keys = {
+    "Distance": "pl_orbsmax",
+    "Orbit Period": "pl_orbper",
+    "Radius": "pl_radj",
+    "Mass": "pl_bmassj",
+    "Planets": "pl_pnum",
+  }
+  return keys[label];
+};
+
+Game.prototype.computerTurn = function () {
+  const categories = this.getCategories(this.cardsInPlay[0]);
+  const randomCategory = this.randomCategory(categories);
+  this.endMatch(randomCategory);
 };
 
 Game.prototype.getCategories = function (object) {
@@ -33,10 +68,18 @@ Game.prototype.getRandomNumber = function (maximum) {
   return Math.floor(Math.random() * Math.floor(maximum));
 };
 
-Game.prototype.compareCards = function (cards, category) {
+Game.prototype.endMatch = function (category) {
+  const winner = this.compareCards(category);
+  this.deck.putCardsAtBackOfHands(winner);
+  PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
+  PubSub.publish('Game:winner-determined', winner);
+  this.checkWinner();
+};
+
+Game.prototype.compareCards = function (category) {
   console.log(category);
   const winnerCard = []
-  for (card of cards) {
+  for (card of this.cardsInPlay) {
     if (winnerCard.length === 0) {
       winnerCard.push(card);
     }
@@ -48,52 +91,7 @@ Game.prototype.compareCards = function (cards, category) {
       return 0;
     }
   };
-  return cards.indexOf(winnerCard[0])+1;
-};
-
-
-Game.prototype.playMatch = function () {
-  const cardsInPlay = this.deck.popCardsForPlayers();
-  PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
-  if (this.currentPlayer === 1) {
-    this.playerTurn(cardsInPlay);
-  }
-  else if (this.currentPlayer === 2) {
-    this.computerTurn(cardsInPlay);
-  }
-};
-
-Game.prototype.playerTurn = function (cardsInPlay) {
-  PubSub.subscribe('CardView:category-clicked', (event) => {
-    const category = this.keyFormatter(event.detail);
-    this.endMatch(cardsInPlay, category);
-  })
-};
-
-Game.prototype.computerTurn = function (cardsInPlay) {
-  const categories = this.getCategories(cardsInPlay[0]);
-  const randomCategory = this.randomCategory(categories);
-  this.endMatch(cardsInPlay, randomCategory);
-};
-
-Game.prototype.keyFormatter = function (label) {
-  const keys = {
-    "Distance": "pl_orbsmax",
-    "Orbit Period": "pl_orbper",
-    "Radius": "pl_radj",
-    "Mass": "pl_bmassj",
-    "Planets": "pl_pnum",
-  }
-  return keys[label];
-};
-
-Game.prototype.endMatch = function (cardsInPlay, category) {
-  debugger;
-  const winner = this.compareCards(cardsInPlay, category);
-  this.deck.putCardsAtBackOfHands(winner);
-  PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
-  PubSub.publish('Game:winner-determined', winner);
-  this.checkWinner();
+  return this.cardsInPlay.indexOf(winnerCard[0])+1;
 };
 
 Game.prototype.checkWinner = function () {
@@ -107,7 +105,8 @@ Game.prototype.checkWinner = function () {
     PubSub.publish('Game:game-winner-determined', 'Draw! What are the chances?! (astronomical!)');
   }
   this.switchTurns();
-  this.playMatch();
+  console.log('HANDS', this.deck.hands)
+  // this.playMatch();
 };
 
 Game.prototype.switchTurns = function () {
