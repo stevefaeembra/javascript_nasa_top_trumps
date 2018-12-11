@@ -12,9 +12,10 @@ CardGridView.prototype.bindEvents = function () {
     this.renderCards(event.detail,1);
     this.currentMatchCards = event.detail;
   });
-  PubSub.subscribe('Game:switch-to-player', (event) => {
+  PubSub.subscribe('Game:current-player', (event) => {
     // we know who is next up. If it's player1,
     // hide player2 card, otherwise show both.
+    PubSub.signForDelivery(this,event);
     const new_player = event.detail; // 1 or 2
     this.clearGrid();
     this.renderCards(this.currentMatchCards, new_player);
@@ -29,7 +30,7 @@ CardGridView.prototype.renderCards = function (cards, currentPlayer) {
   cards.forEach((card, index, array) => {
     const cardItem = this.createCardItem(card);
     // if human turn and player index, hide card
-    if (index===1 && currentPlayer===1) {
+    if (index != currentPlayer) {
       cardItem.classList.add("back");
     }
     this.container.appendChild(cardItem);

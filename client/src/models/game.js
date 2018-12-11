@@ -74,6 +74,7 @@ Game.prototype.endMatch = function (category) {
   PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
   PubSub.publish('Game:winner-determined', winner);
   this.checkWinner();
+  //debugger;
   this.switchTurns();
   this.playMatch();
 };
