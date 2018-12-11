@@ -115,6 +115,7 @@ Game.prototype.switchTurns = function () {
   else if (this.currentPlayer === 2) {
     this.currentPlayer = 1;
   }
+  PubSub.publish('Game:current-player', this.currentPlayer);
   console.log('switch turns function', this.currentPlayer);
 };
 
