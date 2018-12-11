@@ -14,16 +14,18 @@ Game.prototype.bindEvents = function () {
     this.playMatch();
   });
   PubSub.subscribe('CardView:category-clicked', (event) => {
+    // if human player, play the category!
     if (this.currentPlayer === 1) {
       this.playerTurn(event.detail)
     }
   });
   PubSub.subscribe("Game:winner-determined", (event) => {
-    // delay switching till this is received
+    // we know who the winner is so show both cards
     PubSub.signForDelivery(this,event);
     PubSub.publish("Game:reveal-both-cards", {});
   });
   PubSub.subscribe("NextMatchButton:start-next-match", (event) => {
+    // user has to hit button to draw two more cards
     this.switchTurns();
     this.playMatch();
   })
