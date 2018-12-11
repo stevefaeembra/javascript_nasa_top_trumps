@@ -17,6 +17,13 @@ Game.prototype.bindEvents = function () {
     if (this.currentPlayer === 1) {
       this.playerTurn(event.detail)
     }
+  });
+  PubSub.subscribe("Game:winner-determined", (event) => {
+    // delay switching till this is received
+    debugger;
+    PubSub.signForDelivery(this,event);
+    this.switchTurns();
+    this.playMatch();
   })
 };
 
@@ -70,14 +77,16 @@ Game.prototype.getRandomNumber = function (maximum) {
 
 Game.prototype.endMatch = function (category) {
   const winner = this.compareCards(category);
+  console.log(`Winner was ${winner} on category ${category}`)
   this.deck.putCardsAtBackOfHands(winner);
   PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
   PubSub.publish('Game:winner-determined', winner);
   this.checkWinner();
-  //debugger;
-  this.switchTurns();
-  this.playMatch();
+  //this.switchTurns();
+  //this.playMatch();
 };
+
+
 
 Game.prototype.compareCards = function (category) {
   console.log(category);
@@ -110,14 +119,15 @@ Game.prototype.checkWinner = function () {
 };
 
 Game.prototype.switchTurns = function () {
+  // debugger;
   if (this.currentPlayer === 1) {
     this.currentPlayer = 2;
   }
   else if (this.currentPlayer === 2) {
     this.currentPlayer = 1;
-  }
-  PubSub.publish('Game:current-player', this.currentPlayer);
-  console.log('switch turns function', this.currentPlayer);
+  };
+  PubSub.publish("Game:current-player", this.currentPlayer);
+  console.log('switching to player', this.currentPlayer);
 };
 
 module.exports = Game;

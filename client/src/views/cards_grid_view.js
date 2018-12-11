@@ -26,11 +26,12 @@ CardGridView.prototype.clearGrid = function () {
   this.container.innerHTML = '';
 };
 
-CardGridView.prototype.renderCards = function (cards, currentPlayer) {
+CardGridView.prototype.renderCards = function (cards, playerUp) {
   cards.forEach((card, index, array) => {
     const cardItem = this.createCardItem(card);
     // if human turn and player index, hide card
-    if (index != currentPlayer) {
+    if (index+1 != playerUp) {
+      console.log(`Index: ${index} CurrentPlayer: ${playerUp} so show back`);
       cardItem.classList.add("back");
     }
     this.container.appendChild(cardItem);
