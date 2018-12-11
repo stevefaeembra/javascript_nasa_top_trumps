@@ -15,9 +15,9 @@ Game.prototype.bindEvents = function () {
   });
   PubSub.subscribe('CardView:category-clicked', (event) => {
     // if human player, play the category!
-    if (this.currentPlayer === 1) {
+    //if (this.currentPlayer === 1) {
       this.playerTurn(event.detail)
-    }
+    //}
   });
   PubSub.subscribe("Game:winner-determined", (event) => {
     // we know who the winner is so show both cards

@@ -11,6 +11,11 @@ HandCounterView.prototype.bindEvents = function () {
     const handSizes = event.detail;
     this.render(handSizes[this.playerNumber - 1]);
   });
+  PubSub.subscribe('Deck:hand-sizes', (event) => {
+    PubSub.signForDelivery(this,event);
+    const handSizes = event.detail;
+    this.render(handSizes[this.playerNumber - 1]);
+  });
 };
 
 HandCounterView.prototype.render = function (score) {

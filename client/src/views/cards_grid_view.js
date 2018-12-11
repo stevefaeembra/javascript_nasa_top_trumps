@@ -23,7 +23,8 @@ CardGridView.prototype.bindEvents = function () {
   PubSub.subscribe('Game:reveal-both-cards', (event) => {
     this.clearGrid();
     this.revealBothCards(this.currentMatchCards);
-  })
+  });
+  
 };
 
 CardGridView.prototype.clearGrid = function () {
