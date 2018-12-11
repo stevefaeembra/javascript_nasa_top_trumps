@@ -7,9 +7,10 @@ const HandCounterView = function (element, playerNumber) {
 
 HandCounterView.prototype.bindEvents = function () {
   PubSub.subscribe('Game:hands-after-match', (event) => {
+    PubSub.signForDelivery(this,event);
     const handSizes = event.details;
+    this.render(handSizes[this.playerNumber - 1]);
   });
-  this.render(handSizes[this.playerNumber - 1]);
 };
 
 HandCounterView.prototype.render = function (score) {
