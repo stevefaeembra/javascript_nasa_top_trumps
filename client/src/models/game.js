@@ -58,6 +58,22 @@ Game.prototype.playMatch = function () {
   this.deck.putCardsAtBackOfHands(winner);
   PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
   PubSub.publish('Game:winner-determined', winner);
+  this.checkWinner();
+};
+
+Game.prototype.checkWinner = function () {
+  if (this.deck.hands[0].length !== 0 && this.deck.hands[1].length !== 0) {
+    this.playMatch();
+  }
+  else if (this.deck.hands[0].length === 0 && this.deck.hands[1].length !== 0) {
+    PubSub.publish('Game:game-winner-determined', 'Computer wins!');
+  }
+  else if (this.deck.hands[1].length === 0 && this.deck.hands[0].length !== 0) {
+    PubSub.publish('Game:game-winner-determined', 'Player wins!');
+  }
+  else if (this.deck.hands[1].length === 0 && this.deck.hands[0].length === 0) {
+    PubSub.publish('Game:game-winner-determined', 'Draw! What are the chances?! (astronomical!)');
+  }
 };
 
 module.exports = Game;
