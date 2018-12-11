@@ -59,6 +59,14 @@ h1 {
 
 /* Modal Content */
 .rules-content {
+  padding: 1rem;
+
+}
+
+.newLine{
+  font-size: 0.8rem;
+  text-align: left;
+  margin-bottom: 0.5rem;
 }
 
 
