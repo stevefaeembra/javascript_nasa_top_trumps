@@ -13,8 +13,7 @@ Deck.prototype.getDeal = function () {
   .then((nPlanetData) =>{
     this.deck = nPlanetData;
     this.hands = this.splitDeck(this.deck);
-    console.log(this.hands);
-    PubSub.publish('Deck:deck-changed', this.hands);
+    PubSub.publish('Deck:deck-loaded', '');
   })
 };
 
@@ -25,19 +24,16 @@ Deck.prototype.splitDeck = function (deck) {
   return [playerHand, computerHand];
 };
 
-Deck.prototype.popCardsForPlayers = function (hands) {
+Deck.prototype.popCardsForPlayers = function () {
   const poppedCards = [];
-  console.log(hands);
-  hands.forEach(hand => poppedCards.push(hand.pop()));
+  this.hands.forEach(hand => poppedCards.push(hand.pop()));
   if (typeof CustomEvent === 'undefined') {
     return poppedCards;
   }
   else {
     PubSub.publish('Deck:drawn-cards', poppedCards);
-    this.hands = hands;
     this.cardsSentToGame = poppedCards;
     return poppedCards;
-
   }
 };
 
@@ -52,7 +48,6 @@ Deck.prototype.getHandSizes = function (hands) {
 
 Deck.prototype.putCardsAtBackOfHands = function (winner) {
   if (winner === 1) {
-    console.log('AHHHHHH', this.cardsSentToGame);
     this.hands[0].push(this.cardsSentToGame[0]);
     this.hands[0].push(this.cardsSentToGame[1]);
   }
@@ -60,7 +55,7 @@ Deck.prototype.putCardsAtBackOfHands = function (winner) {
     this.hands[1].push(this.cardsSentToGame[0]);
     this.hands[1].push(this.cardsSentToGame[1]);
   }
-  console.log('hand is one array', this.hands);
+  console.log(this.hands);
 };
 
 module.exports = Deck;

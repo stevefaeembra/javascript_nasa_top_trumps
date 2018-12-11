@@ -9,14 +9,8 @@ const Game = function (players) {
 };
 
 Game.prototype.bindEvents = function () {
-  PubSub.subscribe('Deck:deck-changed', (event) => {
-    const myhands = event.detail;
-    const cardsInPlay = this.deck.popCardsForPlayers(myhands);
-    const categories = this.getCategories(cardsInPlay[0]);
-    const randomCategory = this.randomCategory(categories);
-    const winner = this.compareCards(cardsInPlay, randomCategory);
-    this.deck.putCardsAtBackOfHands(winner);
-    PubSub.publish('Game:winner-determined', winner);
+  PubSub.subscribe('Deck:deck-loaded', () => {
+    this.playMatch();
   });
 };
 
@@ -56,5 +50,14 @@ Game.prototype.compareCards = function (cards, category) {
   return cards.indexOf(winnerCard[0])+1;
 };
 
+Game.prototype.playMatch = function () {
+  const cardsInPlay = this.deck.popCardsForPlayers();
+  const categories = this.getCategories(cardsInPlay[0]);
+  const randomCategory = this.randomCategory(categories);
+  const winner = this.compareCards(cardsInPlay, randomCategory);
+  this.deck.putCardsAtBackOfHands(winner);
+  PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
+  PubSub.publish('Game:winner-determined', winner);
+};
 
 module.exports = Game;
