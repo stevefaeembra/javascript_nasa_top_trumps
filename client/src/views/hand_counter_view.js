@@ -13,6 +13,7 @@ HandCounterView.prototype.bindEvents = function () {
 };
 
 HandCounterView.prototype.render = function (score) {
+  this.element.innerHTML = '';
   const scoreView = document.createElement('div');
   scoreView.className = 'score';
   scoreView.textContent = `${score}`;
