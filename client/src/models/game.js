@@ -20,9 +20,9 @@ Game.prototype.bindEvents = function () {
   });
   PubSub.subscribe("Game:winner-determined", (event) => {
     // delay switching till this is received
-    debugger;
     PubSub.signForDelivery(this,event);
     this.switchTurns();
+    debugger;
     this.playMatch();
   })
 };
