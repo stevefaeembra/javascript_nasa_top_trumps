@@ -5,7 +5,7 @@ const WinnerView =require("./views/winner_view.js");
 document.addEventListener('DOMContentLoaded', () => {
   console.log("DOM has loaded")
 
-  const game = new Game(2);
+  const game = new Game();
   game.bindEvents();
   game.startGame();
 

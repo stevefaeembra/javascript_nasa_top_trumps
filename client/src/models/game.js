@@ -3,8 +3,8 @@ const RequestHelper = require('../helpers/request_helper.js');
 const Deck = require('./deck.js');
 
 
-const Game = function (players) {
-  this.currentPlayers = players;
+const Game = function () {
+  this.currentPlayer = 1;
   this.deck = new Deck();
 };
 
@@ -73,6 +73,17 @@ Game.prototype.checkWinner = function () {
   }
   else if (this.deck.hands[1].length === 0 && this.deck.hands[0].length === 0) {
     PubSub.publish('Game:game-winner-determined', 'Draw! What are the chances?! (astronomical!)');
+  }
+  this.switchTurns();
+  console.log(this.currentPlayer);
+};
+
+Game.prototype.switchTurns = function () {
+  if (this.currentPlayer === 1) {
+    this.currentPlayer = 2;
+  }
+  else if (this.currentPlayer === 2) {
+    this.currentPlayer = 1;
   }
 };
 
