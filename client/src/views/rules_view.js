@@ -5,13 +5,15 @@ const RulesView = function (element){
 };
 
 
-RulesView.prototype.renderRules = function () {
+RulesView.prototype.bindEvents = function () {
   PubSub.subscribe("Rules:show-rules", (event) => {
     this.renderModal();
   });
 }
 
 RulesView.prototype.renderModal = function () {
+  this.element.innerHTML = '';
+
   const rulesContent = document.createElement('div');
   rulesContent.className = 'rules-content';
 
