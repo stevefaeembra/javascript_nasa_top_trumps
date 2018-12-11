@@ -9,6 +9,11 @@ RulesView.prototype.bindEvents = function () {
   PubSub.subscribe("Rules:show-rules", (event) => {
     this.renderModal();
   });
+
+  this.element.addEventListener("click", (event) => {
+    this.element.style.visibility = 'hidden';
+  })
+
 }
 
 RulesView.prototype.renderModal = function () {
