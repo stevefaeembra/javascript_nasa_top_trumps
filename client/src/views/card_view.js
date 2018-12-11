@@ -1,3 +1,5 @@
+const PubSub = require('../helpers/pub_sub.js');
+
 const CardView = function (container) {
   this.container = container;
 };
@@ -40,6 +42,12 @@ CardView.prototype.renderCardDetails = function (card) {
     const statDiv = this.createCustomElement('div','className','stats-row');
     const labelDiv = this.createCustomElement('div','className','stats-row-label');
     labelDiv.textContent = key;
+    if (labelDiv.textContent !== "Name" && labelDiv.textContent !== "Star Temp") {
+    labelDiv.addEventListener('click', (event) => {
+      PubSub.publish('CardView:category-clicked', event.target.textContent)
+      console.log('eventValue', event.target);
+    })
+  }
     const valueDiv = this.createCustomElement('div','className','stats-row-value');
     valueDiv.textContent = playing_fields[key];
     statDiv.appendChild(labelDiv);
