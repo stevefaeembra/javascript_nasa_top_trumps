@@ -22,8 +22,14 @@ Game.prototype.bindEvents = function () {
     // delay switching till this is received
     PubSub.signForDelivery(this,event);
     this.switchTurns();
-    debugger;
-    this.playMatch();
+    if (this.currentPlayer==1) {
+      this.playMatch();
+    }
+  });
+  PubSub.subscribe("NextMatchButton:start-next-match", (event) => {
+    if (this.currentPlayer==2) {
+      this.playMatch();
+    };
   })
 };
 
