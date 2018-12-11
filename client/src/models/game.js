@@ -58,7 +58,7 @@ Game.prototype.playMatch = function () {
   this.deck.putCardsAtBackOfHands(winner);
   PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
   PubSub.publish('Game:winner-determined', winner);
-  this.checkWinner();
+  setTimeout(this.checkWinner(),2000);
 };
 
 Game.prototype.checkWinner = function () {
