@@ -50,8 +50,10 @@ Game.prototype.compareCards = function (cards, category) {
   return cards.indexOf(winnerCard[0])+1;
 };
 
+
 Game.prototype.playMatch = function () {
   const cardsInPlay = this.deck.popCardsForPlayers();
+  if (this.currentPlayer === 1) {}
   const categories = this.getCategories(cardsInPlay[0]);
   const randomCategory = this.randomCategory(categories);
   const winner = this.compareCards(cardsInPlay, randomCategory);
@@ -75,7 +77,6 @@ Game.prototype.checkWinner = function () {
     PubSub.publish('Game:game-winner-determined', 'Draw! What are the chances?! (astronomical!)');
   }
   this.switchTurns();
-  console.log(this.currentPlayer);
 };
 
 Game.prototype.switchTurns = function () {
