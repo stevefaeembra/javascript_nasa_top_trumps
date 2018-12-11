@@ -9,7 +9,17 @@ CardView.prototype.renderCardDetails = function (card) {
   const image = this.createCustomElement('div', 'className', 'planet-image');
   const stats = this.createCustomElement('div', 'className', 'stats');
 
-  const imageDiv = this.createCustomElement('img', 'src', './images/earth.jpg');
+  // pick coloured card at random
+  // colour defined matches colour temp of star
+  // in Kelvin
+  let frame = Math.floor(parseFloat(card.st_teff)/500.0);
+  if (frame>20) {
+    frame = 20;
+  };
+  let frameString=`000${frame}`.slice(-4);
+  const url = `./images/${frameString}.png`;
+  console.log(url);
+  const imageDiv = this.createCustomElement('img', 'src', url);
 
   image.appendChild(imageDiv);
 
@@ -17,11 +27,12 @@ CardView.prototype.renderCardDetails = function (card) {
 
   const playing_fields = {
     "Name": card.pl_name,
-    "Distance to Sun (AU)": card.pl_orbsmax,
-    "Orbital Period (Days)": card.pl_orbper,
-    "Radius (x Jupiter)": card.pl_radj,
-    "Mass (x Jupiter)": card.pl_bmassj,
-    "Number in System": card.pl_pnum
+    "Distance": card.pl_orbsmax,
+    "Orbit Period": card.pl_orbper,
+    "Radius": card.pl_radj,
+    "Mass": card.pl_bmassj,
+    "Planets": card.pl_pnum,
+    "Star Temp": card.st_teff
   };
 
 

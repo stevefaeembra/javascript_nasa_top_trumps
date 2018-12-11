@@ -16,6 +16,7 @@ Game.prototype.bindEvents = function () {
 
 Game.prototype.startGame = function () {
   this.deck.getDeal();
+  this.startMatch();
 };
 
 Game.prototype.getCategories = function (object) {
@@ -64,12 +65,7 @@ Game.prototype.playMatch = function () {
 };
 
 Game.prototype.checkWinner = function () {
-  if (this.deck.hands[0].length !== 0 && this.deck.hands[1].length !== 0) {
-    PubSub.subscribe("NextMatchButton:start-next-match", () => {
-      this.playMatch();
-    });
-  }
-  else if (this.deck.hands[0].length === 0 && this.deck.hands[1].length !== 0) {
+  if (this.deck.hands[0].length === 0 && this.deck.hands[1].length !== 0) {
     PubSub.publish('Game:game-winner-determined', 'Computer wins!');
   }
   else if (this.deck.hands[1].length === 0 && this.deck.hands[0].length !== 0) {
@@ -79,6 +75,12 @@ Game.prototype.checkWinner = function () {
     PubSub.publish('Game:game-winner-determined', 'Draw! What are the chances?! (astronomical!)');
   }
   this.switchTurns();
+};
+
+Game.prototype.startMatch = function () {
+  PubSub.subscribe("NextMatchButton:start-next-match", () => {
+    this.playMatch();
+  });
 };
 
 Game.prototype.switchTurns = function () {

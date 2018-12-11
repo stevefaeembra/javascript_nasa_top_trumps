@@ -99,10 +99,12 @@ h1 {
 }
 
 .score {
-  background-color: white;
+  background-color: rgba(0,0,0,0);
   height: 9rem;
   width: 4rem;
-  font-size: 2rem;
+  font-size: 6rem;
+  color: white;
+  text-shadow: 0px 0px 28px cyan;
 }
 
 input[type=button] {
@@ -160,7 +162,7 @@ img {
   padding: 0.5rem 0.5rem 0.4rem 0.5rem;
   background-color: maroon;
   color: white;
-  flex: 3;
+  flex: 2;
   text-align: left;
 }
 
@@ -171,6 +173,6 @@ img {
   margin: 0.2rem 0rem;
   background-color: maroon;
   color: white;
-  flex: 2;
+  flex: 3;
   text-align: center;
 }
