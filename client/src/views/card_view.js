@@ -27,11 +27,12 @@ CardView.prototype.renderCardDetails = function (card) {
 
   const playing_fields = {
     "Name": card.pl_name,
-    "Distance to Sun (AU)": card.pl_orbsmax,
-    "Orbital Period (Days)": card.pl_orbper,
-    "Radius (x Jupiter)": card.pl_radj,
-    "Mass (x Jupiter)": card.pl_bmassj,
-    "Number in System": card.pl_pnum
+    "Distance": card.pl_orbsmax,
+    "Orbit Period": card.pl_orbper,
+    "Radius": card.pl_radj,
+    "Mass": card.pl_bmassj,
+    "Planets": card.pl_pnum,
+    "Star Temp": card.st_teff
   };
 
 
