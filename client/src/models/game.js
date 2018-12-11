@@ -21,15 +21,11 @@ Game.prototype.bindEvents = function () {
   PubSub.subscribe("Game:winner-determined", (event) => {
     // delay switching till this is received
     PubSub.signForDelivery(this,event);
-    this.switchTurns();
-    if (this.currentPlayer==1) {
-      this.playMatch();
-    }
+    PubSub.publish("Game:reveal-both-cards", {});
   });
   PubSub.subscribe("NextMatchButton:start-next-match", (event) => {
-    if (this.currentPlayer==2) {
-      this.playMatch();
-    };
+    this.switchTurns();
+    this.playMatch();
   })
 };
 

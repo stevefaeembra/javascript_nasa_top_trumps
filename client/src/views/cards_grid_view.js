@@ -20,10 +20,21 @@ CardGridView.prototype.bindEvents = function () {
     this.clearGrid();
     this.renderCards(this.currentMatchCards, new_player);
   });
+  PubSub.subscribe('Game:reveal-both-cards', (event) => {
+    this.clearGrid();
+    this.revealBothCards(this.currentMatchCards);
+  })
 };
 
 CardGridView.prototype.clearGrid = function () {
   this.container.innerHTML = '';
+};
+
+CardGridView.prototype.revealBothCards = function (cards) {
+  cards.forEach((card) => {
+    const cardItem = this.createCardItem(card);
+    this.container.appendChild(cardItem);
+  })
 };
 
 CardGridView.prototype.renderCards = function (cards, playerUp) {
