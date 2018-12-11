@@ -1,7 +1,7 @@
 const PubSub = require('../helpers/pub_sub.js');
 
 const RulesView = function (element){
-  this.element = element
+  this.element = element;
 };
 
 
@@ -13,15 +13,17 @@ RulesView.prototype.bindEvents = function () {
 
 RulesView.prototype.renderModal = function () {
   this.element.innerHTML = '';
+  this.element.style.visibility = 'visible';
 
   const rulesContent = document.createElement('div');
-  rulesContent.className = 'rules-content';
+  rulesContent.className = 'rules-modal';
+  rulesContent.style.display = 'visible';
 
-  const rulesBody = document.createElement('div');
-  rulesBody.className = 'rulesBody';
-  rulesBody.textContent = 'Please see this message!!';
+  const rulesText = document.createElement('div');
+  rulesText.className = 'rules-text';
+  rulesText.textContent = 'Please see this message!!';
 
-  rulesContent.appendChild(rulesBody)
+  rulesContent.appendChild(rulesText);
   this.element.appendChild(rulesContent);
 };
 

@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
   rulesButtonView.bindEvents();
 
   const rulesView = new RulesView(
-    document.querySelector('#rules-modal')
+    document.querySelector('#rules-modal-container')
   );
   rulesView.bindEvents();
 
