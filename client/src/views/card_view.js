@@ -9,7 +9,17 @@ CardView.prototype.renderCardDetails = function (card) {
   const image = this.createCustomElement('div', 'className', 'planet-image');
   const stats = this.createCustomElement('div', 'className', 'stats');
 
-  const imageDiv = this.createCustomElement('img', 'src', './images/earth.jpg');
+  // pick coloured card at random
+  // colour defined matches colour temp of star
+  // in Kelvin
+  let frame = Math.floor(parseFloat(card.st_teff)/500.0);
+  if (frame>20) {
+    frame = 20;
+  };
+  let frameString=`000${frame}`.slice(-4);
+  const url = `./images/${frameString}.png`;
+  console.log(url);
+  const imageDiv = this.createCustomElement('img', 'src', url);
 
   image.appendChild(imageDiv);
 
