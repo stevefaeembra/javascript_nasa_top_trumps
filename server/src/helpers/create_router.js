@@ -9,7 +9,7 @@ const PlanetRouter = function (collection) {
 
   router.get('/', (req, res) => {
     croupier = new Croupier(collection);
-    res.json(croupier.deal(10));
+    res.json(croupier.deal(3));
   });
 
   router.get('/deal/:number', (req, res) => {

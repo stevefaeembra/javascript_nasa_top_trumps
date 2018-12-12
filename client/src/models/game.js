@@ -44,7 +44,7 @@ Game.prototype.bindEvents = function () {
       PubSub.publish('Game:message', 'Player 2 thinking...');
       setTimeout(() => {
         this.computerTurn();
-      }, 3000)
+      }, 1500)
 
     }
   })
@@ -76,7 +76,7 @@ Game.prototype.computerTurn = function () {
   this.winner = this.compareCards(this.cardsInPlay, randomCategory);
   setTimeout(function () {
     PubSub.publish("Game:reveal-both-cards", {});
-  }, 3000);
+  }, 1500);
   PubSub.publish('Game:winner-determined', this.winner);
 };
 
