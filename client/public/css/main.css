@@ -243,7 +243,13 @@ img {
 /* when we hover over a label light it up
 as well as the value div next to it */
 
+.stats-row:first-child .stats-row-label:hover,
+.stats-row:first-child .stats-row-label:hover ~ .stats-row-value {
+  background-color: maroon;
+}
+
 .stats-row-label:hover,
 .stats-row-label:hover ~ .stats-row-value {
   background-color: red;
+  cursor: grab;
 }
