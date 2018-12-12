@@ -6,7 +6,7 @@ const StartGameButtonView = function (element) {
 
 StartGameButtonView.prototype.bindEvents = function () {
   this.element.addEventListener("click", (event) => {
-    PubSub.publish("StartGameButton:start-game",{});
+    PubSub.publish("StartButton:start-game",{});
   });
 };
 
