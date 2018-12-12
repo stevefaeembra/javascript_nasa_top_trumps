@@ -48,12 +48,12 @@ Deck.prototype.getHandSizes = function () {
 
 Deck.prototype.putCardsAtBackOfHands = function (winner) {
   if (winner === 1) {
-    this.hands[0].push(this.cardsSentToGame[0]);
-    this.hands[0].push(this.cardsSentToGame[1]);
+    this.hands[0].unshift(this.cardsSentToGame[0]);
+    this.hands[0].unshift(this.cardsSentToGame[1]);
   }
   else if (winner === 2) {
-    this.hands[1].push(this.cardsSentToGame[0]);
-    this.hands[1].push(this.cardsSentToGame[1]);
+    this.hands[1].unshift(this.cardsSentToGame[0]);
+    this.hands[1].unshift(this.cardsSentToGame[1]);
   }
   console.log(this.hands);
 };
