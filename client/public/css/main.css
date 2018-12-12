@@ -39,6 +39,18 @@ h1 {
   font-size: 3rem;
 }
 
+/* Button bar */
+
+.buttonBar {
+  background-color: green;
+  display: block;
+}
+
+#start-game-container,
+#next-match-container {
+  display: inline-block;
+}
+
 /* Modal for game rules */
 
 #rules-modal-container {

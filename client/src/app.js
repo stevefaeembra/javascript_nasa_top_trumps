@@ -3,6 +3,7 @@ const CardsGridView = require('./views/cards_grid_view.js');
 const WinnerView =require("./views/winner_view.js");
 const HandCounterView = require("./views/hand_counter_view.js");
 const NextMatchButtonView = require("./views/next_match_button_view.js");
+const StartGameButtonView = require("./views/start_game_button_view.js");
 const RulesButtonView = require("./views/rules_button_view.js");
 const RulesView = require("./views/rules_view.js");
 
@@ -12,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const game = new Game();
   game.bindEvents();
   game.startGame();
+
+  /* Card deck and scores */
 
   const cardsGridView = new CardsGridView(document.querySelector('#card-grid-container'));
   cardsGridView.bindEvents();
@@ -33,10 +36,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   player2HandCounterView.bindEvents();
 
+  /* main button bar **/
+
   const nextMatchButtonView = new NextMatchButtonView(
     document.querySelector('#next-match')
   );
   nextMatchButtonView.bindEvents();
+
+  const startGameButtonView = new StartGameButtonView(
+    document.querySelector("#start-game")
+  );
+  startGameButtonView.bindEvents();
+
+  /** Rules button and modal */
 
   const rulesButtonView = new RulesButtonView(
     document.querySelector('#rules-button')
