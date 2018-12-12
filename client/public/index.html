@@ -12,21 +12,29 @@
   </head>
   <body>
     <div id="content">
-      <h1>NASA Top Trumps</h1>
-
-      <div id="rules-button" class="button">
-        <input type="button" id="rules-button" value="Rules"></input>
-
-      </div>
+      <h1>Exoplanet Top Trumps</h1>
       <div id="rules-modal-container">
         <!-- inject slide-in modal here -->
       </div>
       <div id="winner-container">
         <!-- announce winner -->
       </div>
-      <div id="next-match-container">
-        <input type="button" id="next-match" value="Next Match!"></input>
+      <!-- button bar -->
+      <div class="buttonBar">
+        <div id="start-game-container">
+          <input type="button" id="start-game" value="Start Game!"></input>
+        </div>
+        <div id="next-match-container">
+          <input type="button" id="next-match" value="Next Match!"></input>
+        </div>
+        <div id="rules-button" class="button">
+          <input type="button" id="rules-button" value="Rules"></input>
+        </div>
       </div>
+      <!-- message view -->
+      <div class="message-bar-message">
+      </div>
+      <!-- main game surface -->
       <div id="game-container">
         <div class="hand-counter" id="player1" >
           <!-- remaining cards for player 1 -->

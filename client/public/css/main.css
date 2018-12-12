@@ -39,6 +39,19 @@ h1 {
   font-size: 3rem;
 }
 
+/* Button bar */
+
+.buttonBar {
+  background-color: green;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+#start-game-container,
+#next-match-container {
+  display: inline-block;
+}
+
 /* Modal for game rules */
 
 #rules-modal-container {
@@ -167,4 +180,15 @@ img {
   color: white;
   flex: 3;
   text-align: center;
+}
+
+/* message bar */
+
+.message-bar-message {
+  background-color: rgba(0,0,0,0);
+  height: 1rem;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: white;
+  text-shadow: 0px 0px 28px cyan;
 }
