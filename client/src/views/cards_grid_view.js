@@ -8,20 +8,24 @@ const CardGridView = function (container){
 
 CardGridView.prototype.bindEvents = function () {
   PubSub.subscribe('Deck:drawn-cards', (event) => {
+    PubSub.signForDelivery(this,event);
     this.clearGrid();
     this.renderCards(event.detail,1);
     this.currentMatchCards = event.detail;
   });
   PubSub.subscribe('Game:reveal-both-cards', (event) => {
     // reveal both cards
+    PubSub.signForDelivery(this,event);
     this.clearGrid();
     this.revealCards(this.currentMatchCards);
   });
-  PubSub.subscribe('Game:switch-to-player', (event) => {
+  PubSub.subscribe('Game:current-player-turn', (event) => {
     // we know who is next up. If it's player1,
     // hide player2 card, otherwise show both.
+    PubSub.signForDelivery(this,event);
     const new_player = event.detail; // 1 or 2
     this.clearGrid();
+    PubSub.publish("Game:message", `Over to player ${new_player}`);
     this.renderCards(this.currentMatchCards, new_player);
   });
 };
