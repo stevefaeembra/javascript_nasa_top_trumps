@@ -33,8 +33,7 @@ CardView.prototype.renderCardDetails = function (card) {
     "Orbit Period": card.pl_orbper,
     "Radius": card.pl_radj,
     "Mass": card.pl_bmassj,
-    "Planets": card.pl_pnum,
-    "Star Temp": card.st_teff
+    "Planets": card.pl_pnum
   };
 
 

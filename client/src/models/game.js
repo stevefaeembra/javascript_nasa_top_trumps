@@ -6,17 +6,78 @@ const Deck = require('./deck.js');
 const Game = function () {
   this.currentPlayer = 1;
   this.deck = new Deck();
+  this.cardsInPlay = null;
+  this.winner = null;
 };
 
 Game.prototype.bindEvents = function () {
   PubSub.subscribe('Deck:deck-loaded', () => {
-    this.playMatch();
+    this.deck.getHandSizes();
+    // getHandSizes publishes Deck:hand-sizes
   });
+
+  PubSub.subscribe('StartButton:start-game', () => {
+    this.startMatch();
+    // startMatch pops 2 new cards into play
+  });
+
+  PubSub.subscribe('CardView:category-clicked', (event) => {
+    const formattedKey = this.keyFormatter(event.detail);
+    console.log(this.cardsInPlay);
+    this.winner = this.compareCards(this.cardsInPlay, formattedKey);
+    PubSub.publish('Game:winner-determined', this.winner);
+    PubSub.publish("Game:reveal-both-cards", {});
+  });
+
+  PubSub.subscribe('NextMatchButton:start-next-match', () => {
+    this.deck.putCardsAtBackOfHands(this.winner);
+    this.deck.getHandSizes();
+    this.checkWinner();
+    this.startMatch();
+    // startMatch pops 2 new cards into play
+    this.switchTurns();
+    // switchTurns publishes Game:current-player-turn
+  });
+
+  PubSub.subscribe('Game:current-player-turn', () => {
+    if (this.currentPlayer === 2) {
+      PubSub.publish('Game:message', 'Player 2 thinking...');
+      setTimeout(() => {
+        this.computerTurn();
+      }, 3000)
+
+    }
+  })
 };
 
-Game.prototype.startGame = function () {
+Game.prototype.populateDeck = function () {
   this.deck.getDeal();
-  this.startMatch();
+};
+
+Game.prototype.startMatch = function () {
+  this.cardsInPlay = this.deck.popCardsForPlayers();
+};
+
+Game.prototype.keyFormatter = function (label) {
+ const keys = {
+   "Distance": "pl_orbsmax",
+   "Orbit Period": "pl_orbper",
+   "Radius": "pl_radj",
+   "Mass": "pl_bmassj",
+   "Planets": "pl_pnum",
+ }
+ return keys[label];
+};
+
+Game.prototype.computerTurn = function () {
+  // debugger;
+  const categories = this.getCategories(this.cardsInPlay[0]);
+  const randomCategory = this.randomCategory(categories);
+  this.winner = this.compareCards(this.cardsInPlay, randomCategory);
+  setTimeout(function () {
+    PubSub.publish("Game:reveal-both-cards", {});
+  }, 3000);
+  PubSub.publish('Game:winner-determined', this.winner);
 };
 
 Game.prototype.getCategories = function (object) {
@@ -52,18 +113,6 @@ Game.prototype.compareCards = function (cards, category) {
 };
 
 
-Game.prototype.playMatch = function () {
-  const cardsInPlay = this.deck.popCardsForPlayers();
-  if (this.currentPlayer === 1) {}
-  const categories = this.getCategories(cardsInPlay[0]);
-  const randomCategory = this.randomCategory(categories);
-  const winner = this.compareCards(cardsInPlay, randomCategory);
-  this.deck.putCardsAtBackOfHands(winner);
-  PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
-  PubSub.publish('Game:winner-determined', winner);
-  setTimeout(this.checkWinner(),2000);
-};
-
 Game.prototype.checkWinner = function () {
   if (this.deck.hands[0].length === 0 && this.deck.hands[1].length !== 0) {
     PubSub.publish('Game:game-winner-determined', 'Computer wins!');
@@ -74,13 +123,6 @@ Game.prototype.checkWinner = function () {
   else if (this.deck.hands[1].length === 0 && this.deck.hands[0].length === 0) {
     PubSub.publish('Game:game-winner-determined', 'Draw! What are the chances?! (astronomical!)');
   }
-  this.switchTurns();
-};
-
-Game.prototype.startMatch = function () {
-  PubSub.subscribe("NextMatchButton:start-next-match", () => {
-    this.playMatch();
-  });
 };
 
 Game.prototype.switchTurns = function () {
@@ -90,6 +132,7 @@ Game.prototype.switchTurns = function () {
   else if (this.currentPlayer === 2) {
     this.currentPlayer = 1;
   }
+  PubSub.publish('Game:current-player-turn', this.currentPlayer);
 };
 
 module.exports = Game;

@@ -46,6 +46,20 @@ h1 {
   font-size: 3rem;
 }
 
+/* Button bar */
+
+.buttonBar {
+  background-color: rgba(0,0,0,0);
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+#start-game-container,
+#next-match-container {
+  display: inline-block;
+}
+
 /* Modal for game rules */
 
 #rules-modal-container {
@@ -122,6 +136,17 @@ input[type=button] {
 
 }
 
+input[type=button] {
+  font-family: 'Coda', cursive;
+  border-radius: 1rem;
+}
+
+input[type=button]:hover {
+  border-radius: 1rem;
+  box-shadow: 0px 0px 28px cyan;
+}
+
+
 .player-card {
   flex: 1;
   display: flex;
@@ -138,8 +163,16 @@ input[type=button] {
   flex: 1;
 }
 
+.player-card.back .planet-image {
+  visibility: hidden;
+}
+
 .stats {
   flex: 3;
+}
+
+.player-card.back .stats {
+  visibility: hidden;
 }
 
 img {
@@ -174,4 +207,15 @@ img {
   color: white;
   flex: 3;
   text-align: center;
+}
+
+/* message bar */
+
+.message-bar-message {
+  background-color: rgba(0,0,0,0);
+  height: 1rem;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: white;
+  text-shadow: 0px 0px 28px cyan;
 }

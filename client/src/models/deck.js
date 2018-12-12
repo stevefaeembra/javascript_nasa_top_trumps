@@ -37,9 +37,9 @@ Deck.prototype.popCardsForPlayers = function () {
   }
 };
 
-Deck.prototype.getHandSizes = function (hands) {
+Deck.prototype.getHandSizes = function () {
   const countedHands = [];
-  hands.forEach((hand) => {
+  this.hands.forEach((hand) => {
     countedHands.push(hand.length)
   });
   PubSub.publish('Deck:hand-sizes', countedHands);
@@ -48,12 +48,12 @@ Deck.prototype.getHandSizes = function (hands) {
 
 Deck.prototype.putCardsAtBackOfHands = function (winner) {
   if (winner === 1) {
-    this.hands[0].push(this.cardsSentToGame[0]);
-    this.hands[0].push(this.cardsSentToGame[1]);
+    this.hands[0].unshift(this.cardsSentToGame[0]);
+    this.hands[0].unshift(this.cardsSentToGame[1]);
   }
   else if (winner === 2) {
-    this.hands[1].push(this.cardsSentToGame[0]);
-    this.hands[1].push(this.cardsSentToGame[1]);
+    this.hands[1].unshift(this.cardsSentToGame[0]);
+    this.hands[1].unshift(this.cardsSentToGame[1]);
   }
   console.log(this.hands);
 };

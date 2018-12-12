@@ -6,7 +6,7 @@ const HandCounterView = function (element, playerNumber) {
 };
 
 HandCounterView.prototype.bindEvents = function () {
-  PubSub.subscribe('Game:hands-after-match', (event) => {
+  PubSub.subscribe('Deck:hand-sizes', (event) => {
     PubSub.signForDelivery(this,event);
     const handSizes = event.detail;
     this.render(handSizes[this.playerNumber - 1]);
