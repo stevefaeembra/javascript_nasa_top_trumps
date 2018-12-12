@@ -1,3 +1,5 @@
+const PubSub = require("./helpers/pub_sub");
+
 const Game = require('./models/game.js');
 const CardsGridView = require('./views/cards_grid_view.js');
 const WinnerView =require("./views/winner_view.js");
@@ -6,6 +8,7 @@ const NextMatchButtonView = require("./views/next_match_button_view.js");
 const StartGameButtonView = require("./views/start_game_button_view.js");
 const RulesButtonView = require("./views/rules_button_view.js");
 const RulesView = require("./views/rules_view.js");
+const MessageView = require("./views/message_view.js");
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("DOM has loaded")
@@ -60,4 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
   );
   rulesView.bindEvents();
 
+  /* Message View */
+  const messageView = new MessageView(
+    document.querySelector('.message-bar-message')
+  );
+  messageView.bindEvents();
+
+  /* say hello */
+  PubSub.publish("Game:message", "Welcome to Exoplanets Top Trumps!");
 });

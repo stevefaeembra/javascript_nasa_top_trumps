@@ -181,3 +181,14 @@ img {
   flex: 3;
   text-align: center;
 }
+
+/* message bar */
+
+.message-bar-message {
+  background-color: rgba(0,0,0,0);
+  height: 1rem;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: white;
+  text-shadow: 0px 0px 28px cyan;
+}
