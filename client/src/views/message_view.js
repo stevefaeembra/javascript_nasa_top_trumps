@@ -8,7 +8,7 @@ MessageView.prototype.bindEvents = function () {
   PubSub.subscribe("Game:message", (event) => {
     const message = event.detail;
     this.container.innerHTML = message;
-  })
+  });
 };
 
 module.exports = MessageView;
