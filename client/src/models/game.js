@@ -42,7 +42,10 @@ Game.prototype.bindEvents = function () {
   PubSub.subscribe('Game:current-player-turn', () => {
     if (this.currentPlayer === 2) {
       PubSub.publish('Game:message', 'Player 2 thinking...');
-      this.computerTurn();
+      setTimeout(() => {
+        this.computerTurn();
+      }, 3000)
+
     }
   })
 };
