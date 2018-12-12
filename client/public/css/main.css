@@ -128,6 +128,8 @@ input[type=button] {
 
 }
 
+
+
 .player-card {
   flex: 1;
   display: flex;
@@ -144,8 +146,16 @@ input[type=button] {
   flex: 1;
 }
 
+.player-card.back .planet-image {
+  visibility: hidden;
+}
+
 .stats {
   flex: 3;
+}
+
+.player-card.back .stats {
+  visibility: hidden;
 }
 
 img {
