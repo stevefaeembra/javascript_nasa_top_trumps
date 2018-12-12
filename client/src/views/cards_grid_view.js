@@ -60,5 +60,4 @@ CardGridView.prototype.createCardItem = function (card, playerNumber) {
   return cardItem;
 };
 
-
 module.exports = CardGridView;

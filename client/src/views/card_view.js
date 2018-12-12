@@ -3,7 +3,6 @@ const PubSub = require('../helpers/pub_sub.js');
 const CardView = function (container, player_number) {
   this.container = container;
   this.playerNumber = player_number;
-  debugger;
 };
 
 CardView.prototype.renderCardDetails = function (card) {
