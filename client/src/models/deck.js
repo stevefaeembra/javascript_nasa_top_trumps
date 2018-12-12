@@ -37,9 +37,9 @@ Deck.prototype.popCardsForPlayers = function () {
   }
 };
 
-Deck.prototype.getHandSizes = function (hands) {
+Deck.prototype.getHandSizes = function () {
   const countedHands = [];
-  hands.forEach((hand) => {
+  this.hands.forEach((hand) => {
     countedHands.push(hand.length)
   });
   PubSub.publish('Deck:hand-sizes', countedHands);

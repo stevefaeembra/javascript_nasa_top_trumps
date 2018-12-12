@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const game = new Game();
   game.bindEvents();
-  game.startGame();
+  game.populateDeck();
 
   const cardsGridView = new CardsGridView(document.querySelector('#card-grid-container'));
   cardsGridView.bindEvents();
