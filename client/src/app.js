@@ -2,7 +2,7 @@ const Game = require('./models/game.js');
 const CardsGridView = require('./views/cards_grid_view.js');
 const WinnerView =require("./views/winner_view.js");
 const HandCounterView = require("./views/hand_counter_view.js");
-const ButtonBarView = require("./views/button_bar_view.js");
+const NextMatchButtonView = require("./views/next_match_button_view.js");
 const RulesButtonView = require("./views/rules_button_view.js");
 const RulesView = require("./views/rules_view.js");
 
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   player2HandCounterView.bindEvents();
 
-  const nextMatchButtonView = new ButtonBarView(
+  const nextMatchButtonView = new NextMatchButtonView(
     document.querySelector('#next-match')
   );
   nextMatchButtonView.bindEvents();
