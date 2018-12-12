@@ -41,6 +41,7 @@ Game.prototype.bindEvents = function () {
 
   PubSub.subscribe('Game:current-player-turn', () => {
     if (this.currentPlayer === 2) {
+      PubSub.publish('Game:message', 'Player 2 thinking...');
       this.computerTurn();
     }
   })
@@ -66,11 +67,14 @@ Game.prototype.keyFormatter = function (label) {
 };
 
 Game.prototype.computerTurn = function () {
+  // debugger;
   const categories = this.getCategories(this.cardsInPlay[0]);
   const randomCategory = this.randomCategory(categories);
   this.winner = this.compareCards(this.cardsInPlay, randomCategory);
+  setTimeout(function () {
+    PubSub.publish("Game:reveal-both-cards", {});
+  }, 3000);
   PubSub.publish('Game:winner-determined', this.winner);
-  PubSub.publish("Game:reveal-both-cards", {});
 };
 
 Game.prototype.getCategories = function (object) {
