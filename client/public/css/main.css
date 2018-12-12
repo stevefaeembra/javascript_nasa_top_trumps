@@ -43,7 +43,8 @@ h1 {
 
 .buttonBar {
   background-color: green;
-  display: block;
+  display: flex;
+  margin-bottom: 1rem;
 }
 
 #start-game-container,
