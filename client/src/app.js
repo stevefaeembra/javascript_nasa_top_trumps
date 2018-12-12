@@ -70,5 +70,5 @@ document.addEventListener('DOMContentLoaded', () => {
   messageView.bindEvents();
 
   /* say hello */
-  PubSub.publish("Game:message", "Welcome to Exoplanets Top Trumps!");
+  PubSub.publish("Game:message", "Welcome to Planet Wars!");
 });

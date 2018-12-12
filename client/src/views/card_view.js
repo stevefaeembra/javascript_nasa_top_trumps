@@ -1,13 +1,14 @@
 const PubSub = require('../helpers/pub_sub.js');
 
-const CardView = function (container) {
+const CardView = function (container, player_number) {
   this.container = container;
+  this.playerNumber = player_number;
 };
 
 CardView.prototype.renderCardDetails = function (card) {
   const playerCard = document.createElement('div');
   playerCard.className = 'player-card';
-
+  playerCard.className += ` player-card-${this.playerNumber}`;
   const image = this.createCustomElement('div', 'className', 'planet-image');
   const stats = this.createCustomElement('div', 'className', 'stats');
 

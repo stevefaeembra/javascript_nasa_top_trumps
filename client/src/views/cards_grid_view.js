@@ -36,15 +36,15 @@ CardGridView.prototype.clearGrid = function () {
 
 CardGridView.prototype.revealCards = function (cards) {
   // show both cards
-  cards.forEach((card) => {
-    const cardItem = this.createCardItem(card);
+  cards.forEach((card, index, array) => {
+    const cardItem = this.createCardItem(card, index+1);
     this.container.appendChild(cardItem);
   });
 };
 
 CardGridView.prototype.renderCards = function (cards, currentPlayer) {
   cards.forEach((card, index, array) => {
-    const cardItem = this.createCardItem(card);
+    const cardItem = this.createCardItem(card, index+1);
     // if card index (1=left,2=right) doesn't match current player
     // then mark card to be hidden
     if (index+1 != currentPlayer) {
@@ -54,11 +54,10 @@ CardGridView.prototype.renderCards = function (cards, currentPlayer) {
   });
 };
 
-CardGridView.prototype.createCardItem = function (card) {
-  const cardView = new CardView();
+CardGridView.prototype.createCardItem = function (card, playerNumber) {
+  const cardView = new CardView(this.container,playerNumber);
   const cardItem = cardView.renderCardDetails(card);
   return cardItem;
 };
-
 
 module.exports = CardGridView;
