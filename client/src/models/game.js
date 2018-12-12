@@ -8,6 +8,7 @@ const Game = function () {
   this.deck = new Deck();
   this.cardsInPlay = null;
   this.winner = null;
+  this.allowPlayerToChoose = true;
 };
 
 Game.prototype.bindEvents = function () {
@@ -22,11 +23,14 @@ Game.prototype.bindEvents = function () {
   });
 
   PubSub.subscribe('CardView:category-clicked', (event) => {
+    if (this.allowPlayerToChoose === true) {
     const formattedKey = this.keyFormatter(event.detail);
     console.log(this.cardsInPlay);
     this.winner = this.compareCards(this.cardsInPlay, formattedKey);
     PubSub.publish('Game:winner-determined', this.winner);
     PubSub.publish("Game:reveal-both-cards", {});
+    this.allowPlayerToChoose = false;
+  }
   });
 
   PubSub.subscribe('NextMatchButton:start-next-match', () => {
@@ -131,6 +135,7 @@ Game.prototype.switchTurns = function () {
   }
   else if (this.currentPlayer === 2) {
     this.currentPlayer = 1;
+    this.allowPlayerToChoose = true;
   }
   PubSub.publish('Game:current-player-turn', this.currentPlayer);
 };

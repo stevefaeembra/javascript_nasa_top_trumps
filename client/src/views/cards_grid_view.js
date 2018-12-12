@@ -56,7 +56,7 @@ CardGridView.prototype.renderCards = function (cards, currentPlayer) {
 
 CardGridView.prototype.createCardItem = function (card, playerNumber) {
   const cardView = new CardView(this.container,playerNumber);
-  const cardItem = cardView.renderCardDetails(card);
+  const cardItem = cardView.renderCardDetails(card, playerNumber);
   return cardItem;
 };
 

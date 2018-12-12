@@ -5,7 +5,7 @@ const CardView = function (container, player_number) {
   this.playerNumber = player_number;
 };
 
-CardView.prototype.renderCardDetails = function (card) {
+CardView.prototype.renderCardDetails = function (card, playerNumber) {
   const playerCard = document.createElement('div');
   playerCard.className = 'player-card';
   playerCard.className += ` player-card-${this.playerNumber}`;
@@ -42,12 +42,14 @@ CardView.prototype.renderCardDetails = function (card) {
     const statDiv = this.createCustomElement('div','className','stats-row');
     const labelDiv = this.createCustomElement('div','className','stats-row-label');
     labelDiv.textContent = key;
+    if (playerNumber === 1) {
     if (labelDiv.textContent !== "Name" && labelDiv.textContent !== "Star Temp") {
     labelDiv.addEventListener('click', (event) => {
       PubSub.publish('CardView:category-clicked', event.target.textContent)
       console.log('eventValue', event.target);
     })
   }
+}
     const valueDiv = this.createCustomElement('div','className','stats-row-value');
     valueDiv.textContent = playing_fields[key];
     statDiv.appendChild(labelDiv);
