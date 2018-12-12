@@ -17,18 +17,19 @@ Game.prototype.bindEvents = function () {
   });
 
   PubSub.subscribe('StartButton:start-game', () => {
-    this.startMatch
+    this.startMatch();
     // startMatch pops 2 new cards into play
   });
 
   PubSub.subscribe('CardView:category-clicked', (event) => {
     const formattedKey = this.keyFormatter(event.detail);
+    console.log(this.cardsInPlay);
     this.winner = this.compareCards(this.cardsInPlay, formattedKey);
     PubSub.publish('Game:winner-determined', this.winner);
     PubSub.publish("Game:reveal-both-cards", {});
   });
 
-  PubSub.subscribe('NextMatchButton:clicked', () => {
+  PubSub.subscribe('NextMatchButton:start-next-match', () => {
     this.deck.putCardsAtBackOfHands(this.winner);
     this.deck.getHandSizes();
     this.checkWinner();
@@ -50,7 +51,7 @@ Game.prototype.populateDeck = function () {
 };
 
 Game.prototype.startMatch = function () {
-  const cardsInPlay = this.deck.popCardsForPlayers();
+  this.cardsInPlay = this.deck.popCardsForPlayers();
 };
 
 Game.prototype.keyFormatter = function (label) {
