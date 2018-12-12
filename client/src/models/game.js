@@ -105,17 +105,6 @@ Game.prototype.compareCards = function (cards, category) {
 };
 
 
-Game.prototype.playMatch = function () {
-  const cardsInPlay = this.deck.popCardsForPlayers();
-  if (this.currentPlayer === 1) {}
-
-  const winner = this.compareCards(cardsInPlay, randomCategory);
-  this.deck.putCardsAtBackOfHands(winner);
-  PubSub.publish('Game:hands-after-match', [this.deck.hands[0].length, this.deck.hands[1].length]);
-  PubSub.publish('Game:winner-determined', winner);
-  setTimeout(this.checkWinner(),2000);
-};
-
 Game.prototype.checkWinner = function () {
   if (this.deck.hands[0].length === 0 && this.deck.hands[1].length !== 0) {
     PubSub.publish('Game:game-winner-determined', 'Computer wins!');
@@ -127,8 +116,6 @@ Game.prototype.checkWinner = function () {
     PubSub.publish('Game:game-winner-determined', 'Draw! What are the chances?! (astronomical!)');
   }
 };
-
-
 
 Game.prototype.switchTurns = function () {
   if (this.currentPlayer === 1) {
