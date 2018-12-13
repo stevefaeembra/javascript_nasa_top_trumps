@@ -9,6 +9,7 @@ const StartGameButtonView = require("./views/start_game_button_view.js");
 const RulesButtonView = require("./views/rules_button_view.js");
 const RulesView = require("./views/rules_view.js");
 const MessageView = require("./views/message_view.js");
+const GameWinnerView = require("./views/game_winner_view.js");
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("DOM has loaded")
@@ -71,4 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* say hello */
   PubSub.publish("Game:message", "Welcome to Exoplanets Top Trumps!");
+
+  const gameWinnerView = new GameWinnerView(
+    document.querySelector('#winner-modal-container')
+  );
+  gameWinnerView.bindEvents();
 });
