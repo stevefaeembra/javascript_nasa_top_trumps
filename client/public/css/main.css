@@ -37,7 +37,8 @@ body {
 
 #winner-container,
 #rules-modal,
-h1
+h1,
+#winner-modal-container
 {
   color: white;
 }
@@ -62,7 +63,9 @@ h1 {
 
 /* Modal for game rules */
 
-#rules-modal-container {
+#rules-modal-container,
+#winner-modal-container
+ {
   visibility: hidden;
   position: absolute;
   top: 50%;
@@ -79,15 +82,27 @@ h1 {
 }
 
 /* Modal Content */
-.rules-content {
+.rules-content,
+.gameWinnerBody {
   padding: 1rem;
+}
 
+.gameWinnerBody{
+  display: flex;
+  justify-content: center;
 }
 
 .newLine{
   font-size: 0.8rem;
   text-align: left;
   margin-bottom: 0.5rem;
+}
+
+.winnerLine{
+  color: black;
+  justify-content: center;
+  font-size: :2rem;
+  text-align: center;
 }
 
 
