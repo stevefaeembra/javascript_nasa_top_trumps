@@ -1,15 +1,28 @@
-const CardView = function (container) {
+const PubSub = require('../helpers/pub_sub.js');
+
+const CardView = function (container, player_number) {
   this.container = container;
+  this.playerNumber = player_number;
 };
 
-CardView.prototype.renderCardDetails = function (card) {
+CardView.prototype.renderCardDetails = function (card, playerNumber) {
   const playerCard = document.createElement('div');
   playerCard.className = 'player-card';
-
+  playerCard.className += ` player-card-${this.playerNumber}`;
   const image = this.createCustomElement('div', 'className', 'planet-image');
   const stats = this.createCustomElement('div', 'className', 'stats');
 
-  const imageDiv = this.createCustomElement('img', 'src', './images/earth.jpg');
+  // pick coloured card at random
+  // colour defined matches colour temp of star
+  // in Kelvin
+  let frame = Math.floor(parseFloat(card.st_teff)/500.0);
+  if (frame>20) {
+    frame = 20;
+  };
+  let frameString=`000${frame}`.slice(-4);
+  const url = `./images/${frameString}.png`;
+  console.log(url);
+  const imageDiv = this.createCustomElement('img', 'src', url);
 
   image.appendChild(imageDiv);
 
@@ -17,12 +30,11 @@ CardView.prototype.renderCardDetails = function (card) {
 
   const playing_fields = {
     "Name": card.pl_name,
-    "Distance to Sun (AU)": card.pl_orbsmax,
-    "Orbital Period (Days)": card.pl_orbper,
-    "Radius (x Jupiter)": card.pl_radj,
-    "Mass (x Jupiter)": card.pl_bmassj,
-    "Number in System": card.pl_pnum,
-    "Temperature (K)": card.st_teff
+    "Distance": card.pl_orbsmax,
+    "Orbit Period": card.pl_orbper,
+    "Radius": card.pl_radj,
+    "Mass": card.pl_bmassj,
+    "Planets": card.pl_pnum
   };
 
 
@@ -30,6 +42,14 @@ CardView.prototype.renderCardDetails = function (card) {
     const statDiv = this.createCustomElement('div','className','stats-row');
     const labelDiv = this.createCustomElement('div','className','stats-row-label');
     labelDiv.textContent = key;
+    if (playerNumber === 1) {
+    if (labelDiv.textContent !== "Name" && labelDiv.textContent !== "Star Temp") {
+    labelDiv.addEventListener('click', (event) => {
+      PubSub.publish('CardView:category-clicked', event.target.textContent)
+      console.log('eventValue', event.target);
+    })
+  }
+}
     const valueDiv = this.createCustomElement('div','className','stats-row-value');
     valueDiv.textContent = playing_fields[key];
     statDiv.appendChild(labelDiv);

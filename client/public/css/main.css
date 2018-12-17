@@ -1,0 +1,270 @@
+*, *::before, *::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  background-image: url('../images/galaxy.jpg');
+  background-size: cover;
+}
+
+body {
+  position: relative;
+  width:90%;
+  margin: 0 auto;
+  /*font-family: 'Orbitron', sans-serif;*/
+  font-family: 'Coda', cursive;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+#content {
+  text-align: center;
+}
+
+.title-banner-image {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.message {
+  padding-bottom: 2rem;
+}
+
+#winner-container,
+#rules-modal,
+h1,
+#winner-modal-container
+{
+  color: white;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+/* Button bar */
+
+.buttonBar {
+  background-color: rgba(0,0,0,0);
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+#start-game-container,
+#next-match-container {
+  display: inline-block;
+}
+
+/* Modal for game rules */
+
+#rules-modal-container,
+#winner-modal-container
+ {
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width:512px;
+  height:300px;
+  z-index: 1000;
+  transform: translateX(-50%) translateY(-100%);
+  background-color: wheat;
+  border: 5px solid red;
+}
+
+#rules-modal {
+}
+
+/* Modal Content */
+.rules-content,
+.gameWinnerBody {
+  padding: 1rem;
+}
+
+.gameWinnerBody{
+  display: flex;
+  justify-content: center;
+}
+
+.newLine{
+  font-size: 0.8rem;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.winnerLine{
+  color: black;
+  justify-content: center;
+  font-size: :2rem;
+  text-align: center;
+}
+
+
+
+#winner-container {
+  position: absolute;
+  bottom: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: yellow;
+}
+
+#game-container {
+  display: flex;
+  flex-direction: row;
+  transform: scale(.6);
+  transform-origin: top;
+}
+
+.hand-counter {
+  flex: 1;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score {
+  background-color: rgba(0,0,0,0);
+  height: 9rem;
+  width: 4rem;
+  font-size: 6rem;
+  color: white;
+  text-shadow: 0px 0px 28px cyan;
+}
+
+input[type=button] {
+  font-size: 1.0rem;
+  padding: .5rem;
+  margin: 0.5rem;
+  font-family: 'Coda', cursive;
+}
+
+#card-grid-container {
+  flex: 6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+
+input[type=button] {
+  font-family: 'Coda', cursive;
+  border-radius: 1rem;
+}
+
+input[type=button]:hover {
+  border-radius: 1rem;
+  box-shadow: 0px 0px 28px cyan;
+}
+
+
+.player-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(0deg, orange 0%, green 100%);
+  margin: 0 2rem;
+  padding: 1rem 1rem 2rem 1rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 24px rgba(255,255,255,.8);
+}
+
+.planet-image {
+  flex: 1;
+}
+
+.player-card.back .planet-image {
+  visibility: hidden;
+}
+
+.stats {
+  flex: 3;
+}
+
+.player-card.back .stats {
+  visibility: hidden;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+.stats-row {
+  display: flex;
+  flex-grow: row;
+  padding: 0.2rem 0 ;
+  text-shadow: 0px 0px 8px rgba(0,0,0,.5);
+}
+
+.stats-row-label {
+  border: 2px solid black;
+  border-radius: 1rem 0 0 0;
+  margin: 0.2rem 0.2rem;
+  padding: 0.5rem 0.5rem 0.4rem 0.5rem;
+  background-color: maroon;
+  color: white;
+  flex: 2;
+  text-align: left;
+}
+
+.stats-row-value {
+  border: 2px solid black;
+  border-radius: 0 0 1rem 0;
+  padding: 0.5rem 0.5rem 0.4rem 0.5rem;
+  margin: 0.2rem 0rem;
+  background-color: maroon;
+  color: white;
+  flex: 3;
+  text-align: center;
+}
+
+/* message bar */
+
+.message-bar-message {
+  background-color: rgba(0,0,0,0);
+  height: 1rem;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: white;
+  text-shadow: 0px 0px 28px cyan;
+}
+
+/* 3D tilt of card */
+
+.player-card-1 {
+  transform: perspective(450px) scaleX(1.22) rotateY(15deg) rotateX(2deg) rotateZ(0deg);
+}
+
+.player-card-2 {
+  transform: perspective(450px) translateY(20px) scaleX(1.22) rotateY(-15deg) rotateX(-2deg) rotateZ(0deg);
+}
+
+#winner-container .message {
+  color: white;
+  font-size: 2.2rem;
+  text-shadow: 0px 0px 28px cyan;
+}
+
+/* when we hover over a label light it up
+as well as the value div next to it */
+
+.stats-row:first-child .stats-row-label:hover,
+.stats-row:first-child .stats-row-label:hover ~ .stats-row-value {
+  background-color: maroon;
+}
+
+.stats-row-label:hover,
+.stats-row-label:hover ~ .stats-row-value {
+  background-color: red;
+  cursor: grab;
+}

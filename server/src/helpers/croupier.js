@@ -12,7 +12,8 @@ Croupier.prototype.playCard = function (planet) {
     pl_orbsmax : planet.pl_orbsmax,
     pl_orbper : planet.pl_orbper,
     st_teff : planet.st_teff,
-    pl_pnum : planet.pl_pnum
+    pl_pnum : planet.pl_pnum,
+    pl_bmassj: planet.pl_bmassj
   };
 };
 

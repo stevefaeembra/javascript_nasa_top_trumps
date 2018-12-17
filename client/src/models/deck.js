@@ -4,6 +4,7 @@ const RequestHelper = require('../helpers/request_helper.js');
 const Deck = function () {
   this.deck = null;
   this.hands = null;
+  this.cardsSentToGame = null;
 }
 
 Deck.prototype.getDeal = function () {
@@ -12,8 +13,7 @@ Deck.prototype.getDeal = function () {
   .then((nPlanetData) =>{
     this.deck = nPlanetData;
     this.hands = this.splitDeck(this.deck);
-    console.log(this.hands);
-    PubSub.publish('Deck:deck-changed', this.hands);
+    PubSub.publish('Deck:deck-loaded', '');
   })
 };
 
@@ -24,26 +24,38 @@ Deck.prototype.splitDeck = function (deck) {
   return [playerHand, computerHand];
 };
 
-Deck.prototype.popCardsForPlayers = function (hands) {
+Deck.prototype.popCardsForPlayers = function () {
   const poppedCards = [];
-  console.log(hands);
-  hands.forEach(hand => poppedCards.push(hand.pop()));
+  this.hands.forEach(hand => poppedCards.push(hand.pop()));
   if (typeof CustomEvent === 'undefined') {
     return poppedCards;
   }
   else {
     PubSub.publish('Deck:drawn-cards', poppedCards);
+    this.cardsSentToGame = poppedCards;
     return poppedCards;
   }
 };
 
-Deck.prototype.getHandSizes = function (hands) {
+Deck.prototype.getHandSizes = function () {
   const countedHands = [];
-  hands.forEach((hand) => {
+  this.hands.forEach((hand) => {
     countedHands.push(hand.length)
   });
   PubSub.publish('Deck:hand-sizes', countedHands);
   return countedHands;
+};
+
+Deck.prototype.putCardsAtBackOfHands = function (winner) {
+  if (winner === 1) {
+    this.hands[0].unshift(this.cardsSentToGame[0]);
+    this.hands[0].unshift(this.cardsSentToGame[1]);
+  }
+  else if (winner === 2) {
+    this.hands[1].unshift(this.cardsSentToGame[0]);
+    this.hands[1].unshift(this.cardsSentToGame[1]);
+  }
+  console.log(this.hands);
 };
 
 module.exports = Deck;
