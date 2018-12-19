@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "webpack && node server/server.js",
     "test": "mocha client/src/models/specs server/src/helpers/spec",
     "server:dev": "nodemon server/src/server.js",
     "build": "webpack -w"
@@ -13,12 +13,12 @@
   "license": "ISC",
   "devDependencies": {
     "mocha": "^5.2.0",
-    "nodemon": "^1.17.4",
-    "webpack": "^4.7.0",
-    "webpack-cli": "^3.1.1"
+    "nodemon": "^1.17.4"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "webpack": "^4.7.0",
+    "webpack-cli": "^3.1.1"
   }
 }
